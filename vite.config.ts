@@ -12,4 +12,19 @@ export default defineConfig({
 		}),
 		tailwindcss(),
 	],
+	build: {
+		rollupOptions: {
+			output: {
+				manualChunks(id) {
+					if (!id.includes('node_modules')) return null
+					if (id.includes('react-router-dom')) return 'router'
+					if (id.includes('recharts')) return 'charts'
+					if (id.includes('framer-motion')) return 'motion'
+					if (id.includes('react')) return 'react'
+					return null
+				},
+			},
+		},
+		chunkSizeWarningLimit: 900,
+	},
 })
