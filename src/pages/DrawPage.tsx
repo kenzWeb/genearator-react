@@ -67,6 +67,44 @@ export const DrawPage = () => {
 								className={s.input}
 								disabled={isGenerating}
 							/>
+							<div className={s.spinners}>
+								<button
+									type='button'
+									className={s.spinUp}
+									onClick={() =>
+										setNumbersCount(Math.min(20, numbersCount + 1))
+									}
+									disabled={isGenerating || numbersCount >= 20}
+									aria-label='Увеличить'
+								>
+									<svg
+										width='12'
+										height='12'
+										viewBox='0 0 12 12'
+										fill='none'
+										xmlns='http://www.w3.org/2000/svg'
+									>
+										<path d='M6 3L9 6L3 6L6 3Z' fill='currentColor' />
+									</svg>
+								</button>
+								<button
+									type='button'
+									className={s.spinDown}
+									onClick={() => setNumbersCount(Math.max(1, numbersCount - 1))}
+									disabled={isGenerating || numbersCount <= 1}
+									aria-label='Уменьшить'
+								>
+									<svg
+										width='12'
+										height='12'
+										viewBox='0 0 12 12'
+										fill='none'
+										xmlns='http://www.w3.org/2000/svg'
+									>
+										<path d='M6 9L3 6L9 6L6 9Z' fill='currentColor' />
+									</svg>
+								</button>
+							</div>
 						</div>
 					</div>
 
