@@ -3,31 +3,48 @@ import {NavLink, Outlet} from 'react-router-dom'
 
 export const Layout = () => {
 	return (
-		<div className='min-h-screen'>
-			<nav className='bg-gradient-to-r from-purple-900/30 to-blue-900/30 backdrop-blur-sm border-b border-purple-500/20'>
+		<div className='min-h-screen bg-primary-bg'>
+			<nav className='bg-primary-card/50 backdrop-blur-glass border-b border-primary-border'>
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
 					<div className='flex items-center justify-between h-16'>
 						<motion.div
 							initial={{opacity: 0, x: -20}}
 							animate={{opacity: 1, x: 0}}
-							className='flex items-center space-x-2'
+							className='flex items-center space-x-3'
 						>
-							<div className='w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center'>
-								<span className='text-2xl'>🎲</span>
+							<div className='w-10 h-10 bg-gradient-to-br from-accent-cyan to-accent-mint rounded-xl flex items-center justify-center shadow-glow'>
+								<svg
+									className='w-6 h-6 text-primary-bg'
+									fill='none'
+									stroke='currentColor'
+									viewBox='0 0 24 24'
+								>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										strokeWidth={2}
+										d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+									/>
+								</svg>
 							</div>
-							<h1 className='text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent'>
-								RandomTrust
-							</h1>
+							<div>
+								<h1 className='text-xl font-bold text-text-primary tracking-tight'>
+									RandomTrust
+								</h1>
+								<p className='text-xs text-text-secondary'>
+									Transparent RNG System
+								</p>
+							</div>
 						</motion.div>
 
-						<div className='flex space-x-1'>
+						<div className='flex space-x-2'>
 							<NavLink
 								to='/draw'
 								className={({isActive}) =>
-									`px-4 py-2 rounded-lg transition-all duration-200 ${
+									`px-4 py-2 rounded-xl transition-all duration-300 font-medium ${
 										isActive
-											? 'bg-purple-500/20 text-purple-300 border border-purple-500/40'
-											: 'text-gray-300 hover:bg-purple-500/10 hover:text-purple-300'
+											? 'bg-accent-cyan/20 text-accent-cyan border border-accent-cyan/40 shadow-glow'
+											: 'text-text-secondary hover:bg-primary-card hover:text-text-primary border border-transparent'
 									}`
 								}
 							>
@@ -36,10 +53,10 @@ export const Layout = () => {
 							<NavLink
 								to='/audit'
 								className={({isActive}) =>
-									`px-4 py-2 rounded-lg transition-all duration-200 ${
+									`px-4 py-2 rounded-xl transition-all duration-300 font-medium ${
 										isActive
-											? 'bg-purple-500/20 text-purple-300 border border-purple-500/40'
-											: 'text-gray-300 hover:bg-purple-500/10 hover:text-purple-300'
+											? 'bg-accent-cyan/20 text-accent-cyan border border-accent-cyan/40 shadow-glow'
+											: 'text-text-secondary hover:bg-primary-card hover:text-text-primary border border-transparent'
 									}`
 								}
 							>
@@ -48,10 +65,10 @@ export const Layout = () => {
 							<NavLink
 								to='/demo'
 								className={({isActive}) =>
-									`px-4 py-2 rounded-lg transition-all duration-200 ${
+									`px-4 py-2 rounded-xl transition-all duration-300 font-medium ${
 										isActive
-											? 'bg-purple-500/20 text-purple-300 border border-purple-500/40'
-											: 'text-gray-300 hover:bg-purple-500/10 hover:text-purple-300'
+											? 'bg-accent-cyan/20 text-accent-cyan border border-accent-cyan/40 shadow-glow'
+											: 'text-text-secondary hover:bg-primary-card hover:text-text-primary border border-transparent'
 									}`
 								}
 							>
