@@ -1,23 +1,25 @@
 import {motion} from 'framer-motion'
 import {NavLink, Outlet} from 'react-router-dom'
+import s from './Layout.module.css'
 
 export const Layout = () => {
 	return (
-		<div className='min-h-screen bg-primary-bg'>
-			<nav className='bg-primary-card/50 backdrop-blur-md border-b border-primary-border'>
-				<div className='max-w-5xl mx-auto px-4 sm:px-6 lg:px-8'>
-					<div className='flex items-center justify-between h-14'>
+		<div className={s.app}>
+			<nav className={s.header}>
+				<div className={s.container}>
+					<div className={s.bar}>
 						<motion.div
 							initial={{opacity: 0, x: -20}}
 							animate={{opacity: 1, x: 0}}
-							className='flex items-center space-x-3'
+							className={s.brand}
 						>
-							<div className='w-10 h-10 bg-accent-cyan rounded-xl flex items-center justify-center shadow-glow'>
+							<div className={s.logo}>
 								<svg
-									className='w-6 h-6 text-primary-bg'
-									fill='none'
-									stroke='currentColor'
+									width='22'
+									height='22'
 									viewBox='0 0 24 24'
+									fill='none'
+									stroke='#0D1117'
 								>
 									<path
 										strokeLinecap='round'
@@ -28,24 +30,16 @@ export const Layout = () => {
 								</svg>
 							</div>
 							<div>
-								<h1 className='text-xl font-bold text-text-primary tracking-tight'>
-									RandomTrust
-								</h1>
-								<p className='text-xs text-text-secondary'>
-									Transparent RNG System
-								</p>
+								<div className={s.title}>RandomTrust</div>
+								<div className={s.subtitle}>Transparent RNG System</div>
 							</div>
 						</motion.div>
 
-						<div className='flex gap-2'>
+						<div className={s.nav}>
 							<NavLink
 								to='/draw'
 								className={({isActive}) =>
-									`px-4 py-2 rounded-xl transition-all duration-200 font-medium ${
-										isActive
-											? 'bg-accent-cyan/20 text-accent-cyan border border-accent-cyan/40 shadow-glow'
-											: 'text-text-secondary hover:bg-primary-card hover:text-text-primary border border-transparent'
-									}`
+									isActive ? `${s.navLink} ${s.active}` : s.navLink
 								}
 							>
 								Тираж
@@ -53,11 +47,7 @@ export const Layout = () => {
 							<NavLink
 								to='/audit'
 								className={({isActive}) =>
-									`px-4 py-2 rounded-xl transition-all duration-300 font-medium ${
-										isActive
-											? 'bg-accent-cyan/20 text-accent-cyan border border-accent-cyan/40 shadow-glow'
-											: 'text-text-secondary hover:bg-primary-card hover:text-text-primary border border-transparent'
-									}`
+									isActive ? `${s.navLink} ${s.active}` : s.navLink
 								}
 							>
 								Аудит
@@ -65,11 +55,7 @@ export const Layout = () => {
 							<NavLink
 								to='/demo'
 								className={({isActive}) =>
-									`px-4 py-2 rounded-xl transition-all duration-300 font-medium ${
-										isActive
-											? 'bg-accent-cyan/20 text-accent-cyan border border-accent-cyan/40 shadow-glow'
-											: 'text-text-secondary hover:bg-primary-card hover:text-text-primary border border-transparent'
-									}`
+									isActive ? `${s.navLink} ${s.active}` : s.navLink
 								}
 							>
 								Демо
@@ -79,7 +65,7 @@ export const Layout = () => {
 				</div>
 			</nav>
 
-			<main className='max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
+			<main className={s.container} style={{paddingTop: 24, paddingBottom: 24}}>
 				<Outlet />
 			</main>
 		</div>

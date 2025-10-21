@@ -1,0 +1,117 @@
+.card {
+	background: var(--card);
+	border: 1px solid color-mix(in oklab, var(--cyan) 20%, var(--border));
+	border-radius: var(--radius);
+	padding: 24px;
+	box-shadow: var(--shadow);
+	backdrop-filter: blur(8px);
+}
+.head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 24px;
+	flex-wrap: wrap;
+}
+.title {
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--cyan);
+}
+.badge {
+	padding: 8px 12px;
+	border-radius: 12px;
+	font-weight: 700;
+	border: 1px solid;
+}
+.ok {
+	background: color-mix(in oklab, var(--mint) 20%, transparent);
+	color: var(--mint);
+	border-color: color-mix(in oklab, var(--mint) 40%, transparent);
+}
+.bad {
+	background: color-mix(in oklab, var(--error) 20%, transparent);
+	color: var(--error);
+	border-color: color-mix(in oklab, var(--error) 40%, transparent);
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 16px;
+	margin-bottom: 24px;
+}
+@media (min-width: 1024px) {
+	.grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+.tile {
+	background: color-mix(in oklab, var(--bg) 70%, black 30%);
+	border: 1px solid color-mix(in oklab, var(--cyan) 10%, var(--border));
+	border-radius: 12px;
+	padding: 16px;
+}
+.tileHead {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+.tileTitle {
+	font-weight: 600;
+	color: var(--text);
+}
+.tileState {
+	font-size: 13px;
+	padding: 4px 8px;
+	border-radius: 8px;
+}
+.pass {
+	background: color-mix(in oklab, var(--mint) 15%, transparent);
+	color: var(--mint);
+}
+.fail {
+	background: color-mix(in oklab, var(--error) 15%, transparent);
+	color: var(--error);
+}
+.tileDesc {
+	font-size: 13px;
+	color: var(--muted);
+	margin-bottom: 10px;
+}
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 14px;
+}
+.mono {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		'Liberation Mono', 'Courier New', monospace;
+}
+.value {
+	color: var(--cyan);
+	font-weight: 700;
+}
+.threshold {
+	color: var(--text);
+}
+
+.muted {
+	color: var(--muted);
+}
+
+.chartCard {
+	background: color-mix(in oklab, var(--bg) 70%, black 30%);
+	border: 1px solid color-mix(in oklab, var(--cyan) 10%, var(--border));
+	border-radius: 12px;
+	padding: 16px;
+}
+.chartTitle {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--text);
+	margin-bottom: 12px;
+}

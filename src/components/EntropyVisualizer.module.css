@@ -1,0 +1,167 @@
+.card {
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: 24px;
+	box-shadow: var(--shadow);
+	backdrop-filter: blur(8px);
+}
+.head {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 24px;
+}
+.headIcon {
+	width: 24px;
+	height: 24px;
+	color: var(--cyan);
+}
+.headTitle {
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--text);
+}
+
+.list {
+	display: grid;
+	gap: 12px;
+}
+.item {
+	background: color-mix(in oklab, var(--bg) 70%, black 30%);
+	border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+	border-radius: 12px;
+	padding: 16px;
+	transition: border-color 0.2s ease;
+}
+.item:hover {
+	border-color: color-mix(in oklab, var(--cyan) 30%, var(--border));
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 12px;
+}
+.left {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+.dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 999px;
+	background: color-mix(in oklab, var(--text) 30%, transparent);
+}
+.dotActive {
+	background: var(--mint);
+	box-shadow: 0 0 12px color-mix(in oklab, var(--mint) 50%, transparent);
+}
+@keyframes pulse {
+	0% {
+		opacity: 0.6;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0.6;
+	}
+}
+.pulse {
+	animation: pulse 1.2s ease-in-out infinite;
+}
+.name {
+	font-weight: 600;
+	color: var(--text);
+}
+
+.badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 4px 8px;
+	border-radius: 10px;
+	font-size: 12px;
+	font-weight: 600;
+	border: 1px solid;
+}
+.badge svg {
+	width: 18px;
+	height: 18px;
+}
+.physical {
+	background: color-mix(in oklab, var(--cyan) 10%, transparent);
+	color: var(--cyan);
+	border-color: color-mix(in oklab, var(--cyan) 30%, transparent);
+}
+.hybrid {
+	background: color-mix(in oklab, var(--mint) 10%, transparent);
+	color: var(--mint);
+	border-color: color-mix(in oklab, var(--mint) 30%, transparent);
+}
+.algorithmic {
+	background: color-mix(in oklab, var(--muted) 10%, transparent);
+	color: var(--muted);
+	border-color: color-mix(in oklab, var(--muted) 30%, transparent);
+}
+
+.bytes {
+	font-size: 13px;
+	color: var(--muted);
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		'Liberation Mono', 'Courier New', monospace;
+}
+
+.progress {
+	position: relative;
+	width: 100%;
+	height: 12px;
+	border-radius: 999px;
+	background: color-mix(in oklab, var(--bg) 70%, black 30%);
+	border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+	overflow: hidden;
+}
+.bar {
+	height: 100%;
+	background: var(--cyan);
+	position: relative;
+	box-shadow: 0 0 10px rgba(0, 191, 255, 0.45);
+}
+@keyframes shine {
+	0% {
+		opacity: 0.25;
+	}
+	50% {
+		opacity: 0.4;
+	}
+	100% {
+		opacity: 0.25;
+	}
+}
+.shine {
+	position: absolute;
+	inset: 0;
+	background: rgba(255, 255, 255, 0.08);
+	animation: shine 1.4s ease-in-out infinite;
+}
+
+.foot {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 8px;
+}
+.label {
+	font-size: 12px;
+	color: var(--muted);
+}
+.value {
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--mint);
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		'Liberation Mono', 'Courier New', monospace;
+}

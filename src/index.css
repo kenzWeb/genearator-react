@@ -1,5 +1,4 @@
-@import 'tailwindcss';
-
+/* Global reset and variables (no Tailwind) */
 * {
 	margin: 0;
 	padding: 0;
@@ -14,10 +13,81 @@ body {
 	color: #e6edf3;
 	overflow-x: hidden;
 	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 #root {
 	min-height: 100vh;
+}
+
+:root {
+	/* palette */
+	--bg: #0d1117; /* Основной фон */
+	--bg-2: #0f141b; /* Глубокий фон */
+	--card: #161b22; /* Карточки */
+	--border: #222831; /* Разделители */
+	--text: #e6edf3; /* Текст основной */
+	--muted: #9ba7b4; /* Текст вторичный */
+	--cyan: #00bfff; /* Акцент */
+	--mint: #4bffb4; /* Успех */
+	--warn: #ffd166; /* Предупреждение */
+	--error: #ff4d4d; /* Ошибка */
+
+	/* type scale */
+	--font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+		sans-serif;
+	--font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco,
+		Consolas, 'Liberation Mono', 'Courier New', monospace;
+	--h1: 36px;
+	--h2: 28px;
+	--h3: 22px;
+	--body: 16px;
+	--small: 14px;
+
+	/* layout */
+	--radius: 20px;
+	--radius-sm: 12px;
+	--padding-card: 24px;
+	--gap: 16px;
+	--icon: 24px;
+	--btn-height: 48px;
+
+	/* effects */
+	--shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+	--ring: 0 0 0 2px color-mix(in oklab, var(--cyan) 35%, transparent);
+	--glass: blur(8px);
+}
+
+/* Light theme variant (opt-in via data attribute) */
+:root[data-theme='light'] {
+	--bg: #f7f9fb;
+	--bg-2: #ffffff;
+	--card: #ffffff;
+	--border: #e3e8ee;
+	--text: #0f172a;
+	--muted: #5b6472;
+	--cyan: #008fd6;
+	--mint: #17c690;
+	--warn: #e5a400;
+	--error: #e02424;
+	--shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+@media (prefers-color-scheme: light) {
+	:root:not([data-theme='dark']) {
+		--bg: #f7f9fb;
+		--bg-2: #ffffff;
+		--card: #ffffff;
+		--border: #e3e8ee;
+		--text: #0f172a;
+		--muted: #5b6472;
+		--cyan: #008fd6;
+		--mint: #17c690;
+		--warn: #e5a400;
+		--error: #e02424;
+		--shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+	}
 }
 
 ::-webkit-scrollbar {
@@ -36,5 +106,88 @@ body {
 ::-webkit-scrollbar-thumb:hover {
 	background: #00bfff;
 }
+/* headings */
+h1,
+h2,
+h3,
+h4 {
+	letter-spacing: -0.01em;
+}
 
-/* Note: проект использует чистые классы Tailwind в JSX без кастомных утилит. */
+h1 {
+	font-size: var(--h1);
+	font-weight: 900;
+}
+h2 {
+	font-size: var(--h2);
+	font-weight: 800;
+}
+h3 {
+	font-size: var(--h3);
+	font-weight: 700;
+}
+p {
+	font-size: var(--body);
+}
+small {
+	font-size: var(--small);
+	color: var(--muted);
+}
+
+/* focus ring */
+:focus-visible {
+	outline: none;
+	box-shadow: var(--ring);
+	border-color: var(--cyan);
+}
+
+/* utility surface tokens for examples */
+.u-card {
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: var(--padding-card);
+	box-shadow: var(--shadow);
+	backdrop-filter: var(--glass);
+}
+.u-btn {
+	height: var(--btn-height);
+	padding: 0 20px;
+	border-radius: 12px;
+	font-weight: 700;
+	border: 1px solid var(--border);
+	background: var(--card);
+	color: var(--text);
+	transition: 0.2s ease;
+}
+.u-btn:hover {
+	border-color: var(--cyan);
+}
+.u-btn--primary {
+	background: var(--cyan);
+	color: #0d1117;
+	border-color: var(--cyan);
+}
+.u-btn--success {
+	background: var(--mint);
+	color: #0d1117;
+	border-color: var(--mint);
+}
+.u-btn--ghost {
+	background: color-mix(in oklab, var(--bg) 70%, black 30%);
+}
+.u-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 4px 8px;
+	border-radius: 10px;
+	border: 1px solid var(--border);
+	font-size: 12px;
+}
+.u-chart-grid {
+	stroke: #30363d;
+}
+.u-chart-text {
+	fill: var(--muted);
+}

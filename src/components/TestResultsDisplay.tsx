@@ -9,6 +9,7 @@ import {
 	YAxis,
 } from 'recharts'
 import type {TestResults} from '../types'
+import s from './TestResultsDisplay.module.css'
 
 interface Props {
 	results: TestResults
@@ -29,58 +30,50 @@ export const TestResultsDisplay = ({results}: Props) => {
 	}))
 
 	return (
-		<div className='bg-primary-card/80 backdrop-blur-md rounded-card p-6 border border-accent-cyan/20 shadow-glow'>
-			<div className='flex items-center justify-between mb-6 flex-wrap gap-4'>
-				<h3 className='text-xl font-semibold text-accent-cyan'>
-					Статистические тесты
-				</h3>
+		<div className={s.card}>
+			<div className={s.head}>
+				<h3 className={s.title}>Статистические тесты</h3>
 				<div
-					className={`px-4 py-2 rounded-lg font-semibold ${
-						results.overall === 'passed'
-							? 'bg-accent-mint/20 text-accent-mint border border-accent-mint/40'
-							: 'bg-error/20 text-error border border-error/40'
+					className={`${s.badge} ${
+						results.overall === 'passed' ? s.ok : s.bad
 					}`}
 				>
 					{results.overall === 'passed' ? '✓ Пройдено' : '✗ Не пройдено'}
 				</div>
 			</div>
 
-			<div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6'>
+			<div className={s.grid}>
 				{tests.map((test, index) => (
 					<motion.div
 						key={test.name}
 						initial={{opacity: 0, y: 20}}
 						animate={{opacity: 1, y: 0}}
 						transition={{delay: index * 0.1}}
-						className='bg-primary-bg/40 rounded-lg p-4 border border-accent-cyan/10'
+						className={s.tile}
 					>
-						<div className='flex items-center justify-between mb-2'>
-							<h4 className='font-medium text-text-primary'>{test.name}</h4>
+						<div className={s.tileHead}>
+							<h4 className={s.tileTitle}>{test.name}</h4>
 							<span
-								className={`text-sm px-2 py-1 rounded ${
-									test.result === 'passed'
-										? 'bg-accent-mint/20 text-accent-mint'
-										: 'bg-error/20 text-error'
+								className={`${s.tileState} ${
+									test.result === 'passed' ? s.pass : s.fail
 								}`}
 							>
 								{test.result === 'passed' ? 'Passed' : 'Failed'}
 							</span>
 						</div>
 
-						<p className='text-sm text-text-secondary mb-3'>
-							{test.description}
-						</p>
+						<p className={s.tileDesc}>{test.description}</p>
 
-						<div className='flex items-center justify-between text-sm'>
-							<span className='text-text-secondary'>P-Value:</span>
-							<span className='font-mono text-accent-cyan'>
+						<div className={s.row}>
+							<span className={s.muted}>P-Value:</span>
+							<span className={`${s.mono} ${s.value}`}>
 								{test.pValue.toFixed(4)}
 							</span>
 						</div>
 
-						<div className='flex items-center justify-between text-sm mt-1'>
-							<span className='text-text-secondary'>Порог:</span>
-							<span className='font-mono text-text-primary'>
+						<div className={s.row} style={{marginTop: 4}}>
+							<span className={s.muted}>Порог:</span>
+							<span className={`${s.mono} ${s.threshold}`}>
 								{test.threshold}
 							</span>
 						</div>
@@ -88,25 +81,45 @@ export const TestResultsDisplay = ({results}: Props) => {
 				))}
 			</div>
 
-			<div className='bg-primary-bg/40 rounded-lg p-4 border border-accent-cyan/10'>
-				<h4 className='text-sm font-medium text-text-primary mb-4'>
-					Сравнение P-Values
-				</h4>
+			<div className={s.chartCard}>
+				<h4 className={s.chartTitle}>Сравнение P-Values</h4>
 				<ResponsiveContainer width='100%' height={200}>
 					<BarChart data={chartData}>
+						<defs>
+							<filter
+								id='glowBlue'
+								x='-50%'
+								y='-50%'
+								width='200%'
+								height='200%'
+							>
+								<feGaussianBlur stdDeviation='2.5' result='coloredBlur' />
+								<feMerge>
+									<feMergeNode in='coloredBlur' />
+									<feMergeNode in='SourceGraphic' />
+								</feMerge>
+							</filter>
+							<filter id='glowRed' x='-50%' y='-50%' width='200%' height='200%'>
+								<feGaussianBlur stdDeviation='2.0' result='coloredBlur' />
+								<feMerge>
+									<feMergeNode in='coloredBlur' />
+									<feMergeNode in='SourceGraphic' />
+								</feMerge>
+							</filter>
+						</defs>
 						<CartesianGrid strokeDasharray='3 3' stroke='#30363d' />
 						<XAxis dataKey='name' stroke='#9BA7B4' style={{fontSize: '12px'}} />
 						<YAxis stroke='#9BA7B4' style={{fontSize: '12px'}} />
 						<Tooltip
 							contentStyle={{
-								backgroundColor: '#161B22',
+								backgroundColor: '#0D1117',
 								border: '1px solid #00BFFF33',
-								borderRadius: '0.75rem',
+								borderRadius: '12px',
 							}}
 							labelStyle={{color: '#E6EDF3'}}
 						/>
-						<Bar dataKey='pValue' fill='#00BFFF' />
-						<Bar dataKey='threshold' fill='#FF4D4D' />
+						<Bar dataKey='pValue' fill='#00BFFF' filter='url(#glowBlue)' />
+						<Bar dataKey='threshold' fill='#FF4D4D' filter='url(#glowRed)' />
 					</BarChart>
 				</ResponsiveContainer>
 			</div>

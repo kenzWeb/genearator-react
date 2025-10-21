@@ -1,5 +1,6 @@
 import {motion} from 'framer-motion'
 import type {EntropySource} from '../types'
+import s from './EntropyVisualizer.module.css'
 
 interface Props {
 	sources: EntropySource[]
@@ -12,7 +13,8 @@ export const EntropyVisualizer = ({sources, isCollecting}: Props) => {
 			case 'physical':
 				return (
 					<svg
-						className='w-5 h-5'
+						width={18}
+						height={18}
 						fill='none'
 						stroke='currentColor'
 						viewBox='0 0 24 24'
@@ -28,7 +30,8 @@ export const EntropyVisualizer = ({sources, isCollecting}: Props) => {
 			case 'algorithmic':
 				return (
 					<svg
-						className='w-5 h-5'
+						width={18}
+						height={18}
 						fill='none'
 						stroke='currentColor'
 						viewBox='0 0 24 24'
@@ -44,7 +47,8 @@ export const EntropyVisualizer = ({sources, isCollecting}: Props) => {
 			default:
 				return (
 					<svg
-						className='w-5 h-5'
+						width={18}
+						height={18}
 						fill='none'
 						stroke='currentColor'
 						viewBox='0 0 24 24'
@@ -61,10 +65,10 @@ export const EntropyVisualizer = ({sources, isCollecting}: Props) => {
 	}
 
 	return (
-		<div className='bg-primary-card/50 backdrop-blur-glass rounded-card p-card border border-primary-border shadow-glass'>
-			<div className='flex items-center space-x-2 mb-6'>
+		<div className={s.card}>
+			<div className={s.head}>
 				<svg
-					className='w-6 h-6 text-accent-cyan'
+					className={s.headIcon}
 					fill='none'
 					stroke='currentColor'
 					viewBox='0 0 24 24'
@@ -76,74 +80,58 @@ export const EntropyVisualizer = ({sources, isCollecting}: Props) => {
 						d='M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4'
 					/>
 				</svg>
-				<h3 className='text-xl font-semibold text-text-primary'>
-					Сбор энтропии
-				</h3>
+				<h3 className={s.headTitle}>Сбор энтропии</h3>
 			</div>
 
-			<div className='space-y-4'>
+			<div className={s.list}>
 				{sources.map((source, index) => (
 					<motion.div
 						key={source.name}
 						initial={{opacity: 0, x: -20}}
 						animate={{opacity: 1, x: 0}}
 						transition={{delay: index * 0.1}}
-						className='bg-primary-bg/40 rounded-xl p-4 border border-primary-border/50 hover:border-accent-cyan/30 transition-all duration-300'
+						className={s.item}
 					>
-						<div className='flex items-center justify-between mb-3'>
-							<div className='flex items-center space-x-3'>
+						<div className={s.row}>
+							<div className={s.left}>
 								<div
-									className={`w-3 h-3 rounded-full ${
-										source.collected > 0
-											? 'bg-accent-mint shadow-glow-mint'
-											: 'bg-text-secondary/30'
-									} ${
-										isCollecting && source.collected === 0
-											? 'animate-pulse'
-											: ''
-									}`}
+									className={`${s.dot} ${
+										source.collected > 0 ? s.dotActive : ''
+									} ${isCollecting && source.collected === 0 ? s.pulse : ''}`}
 								/>
-								<span className='font-medium text-text-primary'>
-									{source.name}
-								</span>
+								<span className={s.name}>{source.name}</span>
 								<div
-									className={`flex items-center space-x-1 px-2 py-1 rounded-lg text-xs font-medium ${
+									className={`${s.badge} ${
 										source.type === 'physical'
-											? 'bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20'
+											? s.physical
 											: source.type === 'hybrid'
-											? 'bg-accent-mint/10 text-accent-mint border border-accent-mint/20'
-											: 'bg-text-secondary/10 text-text-secondary border border-text-secondary/20'
+											? s.hybrid
+											: s.algorithmic
 									}`}
 								>
 									{getSourceIcon(source.type)}
 									<span>{source.type}</span>
 								</div>
 							</div>
-							<span className='text-sm text-text-secondary font-mono'>
-								{source.collected} <span className='text-xs'>bytes</span>
+							<span className={s.bytes}>
+								{source.collected} <span style={{fontSize: 11}}>bytes</span>
 							</span>
 						</div>
 
-						<div className='relative w-full bg-primary-bg/60 rounded-full h-3 overflow-hidden border border-primary-border/30'>
+						<div className={s.progress}>
 							<motion.div
 								initial={{width: 0}}
 								animate={{width: `${source.quality * 100}%`}}
 								transition={{duration: 0.5, ease: 'easeOut'}}
-								className='h-full bg-accent-cyan relative'
-								style={{
-									boxShadow:
-										source.quality > 0
-											? '0 0 10px rgba(0, 191, 255, 0.5)'
-											: 'none',
-								}}
+								className={s.bar}
 							>
-								<div className='absolute inset-0 bg-white/10 animate-pulse' />
+								<div className={s.shine} />
 							</motion.div>
 						</div>
 
-						<div className='mt-2 flex items-center justify-between'>
-							<span className='text-xs text-text-secondary'>Качество</span>
-							<span className='text-sm text-accent-mint font-mono font-semibold'>
+						<div className={s.foot}>
+							<span className={s.label}>Качество</span>
+							<span className={s.value}>
 								{(source.quality * 100).toFixed(0)}%
 							</span>
 						</div>

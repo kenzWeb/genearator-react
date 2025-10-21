@@ -1,0 +1,84 @@
+.app {
+	min-height: 100vh;
+	background: var(--bg);
+}
+
+.header {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: color-mix(in oklab, var(--card) 90%, black 10%);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid var(--border);
+}
+
+.container {
+	max-width: 960px; /* ~max-w-5xl */
+	margin: 0 auto;
+	padding: 0 16px;
+}
+
+.bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 56px;
+}
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.logo {
+	width: 40px;
+	height: 40px;
+	border-radius: 12px;
+	background: var(--cyan);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 0 20px rgba(0, 191, 255, 0.25);
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 800;
+	color: var(--text);
+	line-height: 1;
+}
+
+.subtitle {
+	font-size: 11px;
+	color: var(--muted);
+}
+
+.nav {
+	display: flex;
+	gap: 8px;
+}
+
+.navLink {
+	padding: 8px 14px;
+	border-radius: 12px;
+	color: var(--muted);
+	border: 1px solid transparent;
+	transition: all 0.2s ease;
+}
+
+.navLink:hover {
+	color: var(--text);
+	background: #151a20;
+}
+
+.active {
+	color: var(--cyan);
+	border-color: color-mix(in oklab, var(--cyan) 40%, transparent);
+	box-shadow: 0 0 16px rgba(0, 191, 255, 0.18) inset;
+	background: color-mix(in oklab, var(--cyan) 15%, transparent);
+}
+
+.main {
+	padding: 32px 0;
+}
