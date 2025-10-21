@@ -32,16 +32,16 @@ export const DrawPage = () => {
 	}
 
 	return (
-		<div className='space-y-6'>
+		<div className='space-y-8 max-w-5xl mx-auto pt-4'>
 			<motion.div
 				initial={{opacity: 0, y: -20}}
 				animate={{opacity: 1, y: 0}}
 				className='text-center'
 			>
-				<h2 className='text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent'>
+				<h2 className='text-4xl font-extrabold mb-2 text-accent-cyan tracking-tight'>
 					Проведение лотерейного тиража
 				</h2>
-				<p className='text-gray-400 max-w-2xl mx-auto'>
+				<p className='text-text-secondary max-w-2xl mx-auto'>
 					Генерация случайных чисел с использованием гибридного источника
 					энтропии и автоматической верификацией качества
 				</p>
@@ -51,27 +51,31 @@ export const DrawPage = () => {
 				initial={{opacity: 0}}
 				animate={{opacity: 1}}
 				transition={{delay: 0.2}}
-				className='bg-gradient-to-br from-purple-900/20 to-blue-900/20 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20'
+				className='bg-primary-card backdrop-blur-md rounded-xl p-6 border border-primary-border/60 shadow-glass'
 			>
-				<div className='flex items-center justify-between mb-6'>
-					<div className='flex items-center space-x-4'>
-						<label className='text-gray-300'>Количество чисел:</label>
-						<input
-							type='number'
-							min='1'
-							max='20'
-							value={numbersCount}
-							onChange={(e) => setNumbersCount(parseInt(e.target.value) || 1)}
-							className='w-20 px-3 py-2 bg-black/30 border border-purple-500/30 rounded-lg text-white focus:outline-none focus:border-purple-500'
-							disabled={isGenerating}
-						/>
+				<div className='grid grid-cols-1 md:grid-cols-3 gap-4 items-end'>
+					<div className='md:col-span-2'>
+						<label className='block text-sm text-text-secondary mb-2'>
+							Количество чисел
+						</label>
+						<div className='flex items-center gap-3'>
+							<input
+								type='number'
+								min='1'
+								max='20'
+								value={numbersCount}
+								onChange={(e) => setNumbersCount(parseInt(e.target.value) || 1)}
+								className='w-24 h-12 px-3 bg-primary-bg/60 border border-primary-border/60 rounded-lg text-text-primary focus:outline-none focus:border-accent-cyan transition-all'
+								disabled={isGenerating}
+							/>
+						</div>
 					</div>
 
-					<div className='flex space-x-3'>
+					<div className='flex gap-3 justify-start md:justify-end'>
 						<button
 							onClick={handleGenerate}
 							disabled={isGenerating}
-							className='px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed'
+							className='px-6 h-12 bg-accent-cyan text-primary-bg rounded-lg font-semibold hover:bg-accent-cyan/85 transition-all disabled:opacity-50 disabled:cursor-not-allowed'
 						>
 							{isGenerating ? 'Генерация...' : 'Сгенерировать'}
 						</button>
@@ -80,13 +84,13 @@ export const DrawPage = () => {
 							<>
 								<button
 									onClick={handleExport}
-									className='px-6 py-3 bg-green-600 rounded-lg font-semibold hover:bg-green-700 transition-all'
+									className='px-6 h-12 bg-accent-mint text-primary-bg rounded-lg font-semibold hover:bg-accent-mint/85 transition-all'
 								>
 									Экспорт JSON
 								</button>
 								<button
 									onClick={handleExportBinary}
-									className='px-6 py-3 bg-blue-600 rounded-lg font-semibold hover:bg-blue-700 transition-all'
+									className='px-6 h-12 bg-primary-card border border-primary-border/60 text-text-primary rounded-lg font-semibold hover:border-accent-cyan transition-all'
 								>
 									Экспорт 1M битов
 								</button>
@@ -98,7 +102,7 @@ export const DrawPage = () => {
 				{visualizationState.stage !== 'idle' && (
 					<div className='mb-4'>
 						<div className='flex items-center justify-between mb-2'>
-							<span className='text-sm text-gray-400'>
+							<span className='text-sm text-text-secondary'>
 								{visualizationState.stage === 'collecting' &&
 									'Сбор энтропии...'}
 								{visualizationState.stage === 'processing' &&
@@ -106,15 +110,15 @@ export const DrawPage = () => {
 								{visualizationState.stage === 'testing' && 'Запуск тестов...'}
 								{visualizationState.stage === 'complete' && 'Завершено'}
 							</span>
-							<span className='text-sm text-purple-400'>
+							<span className='text-sm text-accent-cyan font-semibold'>
 								{visualizationState.progress}%
 							</span>
 						</div>
-						<div className='w-full bg-gray-700/50 rounded-full h-2 overflow-hidden'>
+						<div className='w-full bg-primary-bg/50 rounded-full h-2 overflow-hidden border border-primary-border/40'>
 							<motion.div
 								initial={{width: 0}}
 								animate={{width: `${visualizationState.progress}%`}}
-								className='h-full bg-gradient-to-r from-purple-500 to-blue-500'
+								className='h-full bg-accent-cyan'
 							/>
 						</div>
 					</div>
@@ -126,9 +130,9 @@ export const DrawPage = () => {
 					<motion.div
 						initial={{opacity: 0, scale: 0.9}}
 						animate={{opacity: 1, scale: 1}}
-						className='bg-gradient-to-br from-purple-900/20 to-blue-900/20 backdrop-blur-sm rounded-xl p-8 border border-purple-500/20 text-center'
+						className='bg-primary-card/80 backdrop-blur-md rounded-card p-8 border border-accent-cyan/20 shadow-glow text-center'
 					>
-						<h3 className='text-2xl font-semibold mb-6 text-purple-300'>
+						<h3 className='text-2xl font-semibold mb-6 text-accent-cyan'>
 							Результат тиража
 						</h3>
 						<div className='flex flex-wrap justify-center gap-4 mb-6'>
@@ -138,48 +142,50 @@ export const DrawPage = () => {
 									initial={{opacity: 0, scale: 0}}
 									animate={{opacity: 1, scale: 1}}
 									transition={{delay: idx * 0.1}}
-									className='w-20 h-20 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center text-3xl font-bold shadow-lg shadow-purple-500/50'
+									className='w-20 h-20 bg-accent-cyan text-primary-bg rounded-xl flex items-center justify-center text-3xl font-bold shadow-glow'
 								>
 									{num}
 								</motion.div>
 							))}
 						</div>
 
-						<div className='bg-black/20 rounded-lg p-4 text-left'>
+						<div className='bg-primary-bg/40 rounded-lg p-4 text-left border border-primary-border/40'>
 							<div className='grid grid-cols-1 md:grid-cols-2 gap-4 text-sm'>
 								<div>
-									<span className='text-gray-400'>ID тиража:</span>
-									<p className='font-mono text-purple-300 break-all'>
+									<span className='text-text-secondary'>ID тиража:</span>
+									<p className='font-mono text-accent-cyan break-all mt-1'>
 										{currentSession.id}
 									</p>
 								</div>
 								<div>
-									<span className='text-gray-400'>Timestamp:</span>
-									<p className='font-mono text-purple-300'>
+									<span className='text-text-secondary'>Timestamp:</span>
+									<p className='font-mono text-accent-cyan mt-1'>
 										{new Date(currentSession.timestamp).toLocaleString()}
 									</p>
 								</div>
 								<div className='md:col-span-2'>
-									<span className='text-gray-400'>SHA-256 Hash:</span>
-									<p className='font-mono text-xs text-purple-300 break-all'>
+									<span className='text-text-secondary'>SHA-256 Hash:</span>
+									<p className='font-mono text-xs text-accent-cyan break-all mt-1'>
 										{currentSession.sequence.hash}
 									</p>
 								</div>
 								<div>
-									<span className='text-gray-400'>Верификация:</span>
+									<span className='text-text-secondary'>Верификация:</span>
 									<p
-										className={`font-semibold ${
+										className={`font-semibold mt-1 ${
 											currentSession.verified
-												? 'text-green-400'
-												: 'text-red-400'
+												? 'text-accent-mint'
+												: 'text-error'
 										}`}
 									>
 										{currentSession.verified ? '✓ Подтверждено' : '✗ Ошибка'}
 									</p>
 								</div>
 								<div>
-									<span className='text-gray-400'>Время сбора энтропии:</span>
-									<p className='text-purple-300'>
+									<span className='text-text-secondary'>
+										Время сбора энтропии:
+									</span>
+									<p className='text-accent-cyan mt-1'>
 										{currentSession.sequence.entropyData.collectionTime}ms
 									</p>
 								</div>

@@ -29,16 +29,16 @@ export const TestResultsDisplay = ({results}: Props) => {
 	}))
 
 	return (
-		<div className='bg-gradient-to-br from-purple-900/20 to-blue-900/20 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20'>
-			<div className='flex items-center justify-between mb-6'>
-				<h3 className='text-xl font-semibold text-purple-300'>
+		<div className='bg-primary-card/80 backdrop-blur-md rounded-card p-6 border border-accent-cyan/20 shadow-glow'>
+			<div className='flex items-center justify-between mb-6 flex-wrap gap-4'>
+				<h3 className='text-xl font-semibold text-accent-cyan'>
 					Статистические тесты
 				</h3>
 				<div
 					className={`px-4 py-2 rounded-lg font-semibold ${
 						results.overall === 'passed'
-							? 'bg-green-500/20 text-green-400 border border-green-500/40'
-							: 'bg-red-500/20 text-red-400 border border-red-500/40'
+							? 'bg-accent-mint/20 text-accent-mint border border-accent-mint/40'
+							: 'bg-error/20 text-error border border-error/40'
 					}`}
 				>
 					{results.overall === 'passed' ? '✓ Пройдено' : '✗ Не пройдено'}
@@ -52,57 +52,61 @@ export const TestResultsDisplay = ({results}: Props) => {
 						initial={{opacity: 0, y: 20}}
 						animate={{opacity: 1, y: 0}}
 						transition={{delay: index * 0.1}}
-						className='bg-black/20 rounded-lg p-4'
+						className='bg-primary-bg/40 rounded-lg p-4 border border-accent-cyan/10'
 					>
 						<div className='flex items-center justify-between mb-2'>
-							<h4 className='font-medium text-gray-200'>{test.name}</h4>
+							<h4 className='font-medium text-text-primary'>{test.name}</h4>
 							<span
 								className={`text-sm px-2 py-1 rounded ${
 									test.result === 'passed'
-										? 'bg-green-500/20 text-green-400'
-										: 'bg-red-500/20 text-red-400'
+										? 'bg-accent-mint/20 text-accent-mint'
+										: 'bg-error/20 text-error'
 								}`}
 							>
 								{test.result === 'passed' ? 'Passed' : 'Failed'}
 							</span>
 						</div>
 
-						<p className='text-sm text-gray-400 mb-3'>{test.description}</p>
+						<p className='text-sm text-text-secondary mb-3'>
+							{test.description}
+						</p>
 
 						<div className='flex items-center justify-between text-sm'>
-							<span className='text-gray-400'>P-Value:</span>
-							<span className='font-mono text-purple-300'>
+							<span className='text-text-secondary'>P-Value:</span>
+							<span className='font-mono text-accent-cyan'>
 								{test.pValue.toFixed(4)}
 							</span>
 						</div>
 
 						<div className='flex items-center justify-between text-sm mt-1'>
-							<span className='text-gray-400'>Порог:</span>
-							<span className='font-mono text-gray-300'>{test.threshold}</span>
+							<span className='text-text-secondary'>Порог:</span>
+							<span className='font-mono text-text-primary'>
+								{test.threshold}
+							</span>
 						</div>
 					</motion.div>
 				))}
 			</div>
 
-			<div className='bg-black/20 rounded-lg p-4'>
-				<h4 className='text-sm font-medium text-gray-300 mb-4'>
+			<div className='bg-primary-bg/40 rounded-lg p-4 border border-accent-cyan/10'>
+				<h4 className='text-sm font-medium text-text-primary mb-4'>
 					Сравнение P-Values
 				</h4>
 				<ResponsiveContainer width='100%' height={200}>
 					<BarChart data={chartData}>
-						<CartesianGrid strokeDasharray='3 3' stroke='#444' />
-						<XAxis dataKey='name' stroke='#888' style={{fontSize: '12px'}} />
-						<YAxis stroke='#888' style={{fontSize: '12px'}} />
+						<CartesianGrid strokeDasharray='3 3' stroke='#30363d' />
+						<XAxis dataKey='name' stroke='#9BA7B4' style={{fontSize: '12px'}} />
+						<YAxis stroke='#9BA7B4' style={{fontSize: '12px'}} />
 						<Tooltip
 							contentStyle={{
-								backgroundColor: '#1a1a2e',
-								border: '1px solid #444',
-								borderRadius: '8px',
+								backgroundColor: '#161B22',
+								border: '1px solid #00BFFF33',
+								borderRadius: '0.75rem',
 							}}
-							labelStyle={{color: '#fff'}}
+							labelStyle={{color: '#E6EDF3'}}
 						/>
-						<Bar dataKey='pValue' fill='#8b5cf6' />
-						<Bar dataKey='threshold' fill='#ef4444' />
+						<Bar dataKey='pValue' fill='#00BFFF' />
+						<Bar dataKey='threshold' fill='#FF4D4D' />
 					</BarChart>
 				</ResponsiveContainer>
 			</div>

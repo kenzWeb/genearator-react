@@ -129,7 +129,7 @@ export const EntropyVisualizer = ({sources, isCollecting}: Props) => {
 								initial={{width: 0}}
 								animate={{width: `${source.quality * 100}%`}}
 								transition={{duration: 0.5, ease: 'easeOut'}}
-								className='h-full bg-gradient-to-r from-accent-cyan to-accent-mint relative'
+								className='h-full bg-accent-cyan relative'
 								style={{
 									boxShadow:
 										source.quality > 0
@@ -137,7 +137,7 @@ export const EntropyVisualizer = ({sources, isCollecting}: Props) => {
 											: 'none',
 								}}
 							>
-								<div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse' />
+								<div className='absolute inset-0 bg-white/10 animate-pulse' />
 							</motion.div>
 						</div>
 

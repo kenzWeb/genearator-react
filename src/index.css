@@ -36,3 +36,5 @@ body {
 ::-webkit-scrollbar-thumb:hover {
 	background: #00bfff;
 }
+
+/* Note: проект использует чистые классы Tailwind в JSX без кастомных утилит. */
