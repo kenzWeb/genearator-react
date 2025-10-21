@@ -1,44 +1,12 @@
 import {motion} from 'framer-motion'
 import {Upload} from 'lucide-react'
-import {useState} from 'react'
 import {TestResultsDisplay} from '../components/TestResultsDisplay'
-import {useRandomGenerator} from '../hooks/useRandomGenerator'
-import type {TestResults} from '../types'
+import {useAuditAnalyzer} from '../features/audit/useAuditAnalyzer'
 import s from './AuditPage.module.css'
 
 export const AuditPage = () => {
-	const {analyzeExternalSequence, verificationService} = useRandomGenerator()
-	const [testResults, setTestResults] = useState<TestResults | null>(null)
-	const [isAnalyzing, setIsAnalyzing] = useState(false)
-	const [fileName, setFileName] = useState<string>('')
-
-	const handleFileUpload = async (
-		event: React.ChangeEvent<HTMLInputElement>,
-	) => {
-		const file = event.target.files?.[0]
-		if (!file) return
-
-		setFileName(file.name)
-		setIsAnalyzing(true)
-
-		try {
-			const binaryData = await verificationService.parseBinaryFile(file)
-
-			if (binaryData.length < 100) {
-				alert('Файл должен содержать минимум 100 битов')
-				setIsAnalyzing(false)
-				return
-			}
-
-			const results = await analyzeExternalSequence(binaryData)
-			setTestResults(results)
-		} catch (error) {
-			alert('Ошибка при обработке файла')
-			console.error(error)
-		} finally {
-			setIsAnalyzing(false)
-		}
-	}
+	const {isAnalyzing, fileName, testResults, handleFileUpload} =
+		useAuditAnalyzer()
 
 	return (
 		<div className={s.page}>
@@ -65,7 +33,10 @@ export const AuditPage = () => {
 						<input
 							type='file'
 							accept='.txt'
-							onChange={handleFileUpload}
+							onChange={(e) => {
+								const file = e.target.files?.[0]
+								if (file) handleFileUpload(file)
+							}}
 							className={s.hidden}
 							id='file-upload'
 							disabled={isAnalyzing}

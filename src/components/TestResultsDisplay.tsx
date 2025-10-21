@@ -8,6 +8,9 @@ import {
 	XAxis,
 	YAxis,
 } from 'recharts'
+import {formatPValue, overallLabel, resultLabel} from '../domain/formatters'
+import {getChartData, getTestsList} from '../domain/selectors/testResults'
+import {overallBadgeClass} from '../domain/selectors/testStatus'
 import type {TestResults} from '../types'
 import s from './TestResultsDisplay.module.css'
 
@@ -16,29 +19,15 @@ interface Props {
 }
 
 export const TestResultsDisplay = ({results}: Props) => {
-	const tests = [
-		results.frequencyTest,
-		results.runsTest,
-		results.chiSquareTest,
-		results.serialCorrelationTest,
-	]
-
-	const chartData = tests.map((test) => ({
-		name: test.name.replace(' Test', ''),
-		pValue: test.pValue,
-		threshold: test.threshold,
-	}))
+	const tests = getTestsList(results)
+	const chartData = getChartData(results)
 
 	return (
 		<div className={s.card}>
 			<div className={s.head}>
 				<h3 className={s.title}>Статистические тесты</h3>
-				<div
-					className={`${s.badge} ${
-						results.overall === 'passed' ? s.ok : s.bad
-					}`}
-				>
-					{results.overall === 'passed' ? '✓ Пройдено' : '✗ Не пройдено'}
+				<div className={overallBadgeClass(results.overall, s)}>
+					{overallLabel(results.overall)}
 				</div>
 			</div>
 
@@ -58,7 +47,7 @@ export const TestResultsDisplay = ({results}: Props) => {
 									test.result === 'passed' ? s.pass : s.fail
 								}`}
 							>
-								{test.result === 'passed' ? 'Passed' : 'Failed'}
+								{resultLabel(test.result)}
 							</span>
 						</div>
 
@@ -67,7 +56,7 @@ export const TestResultsDisplay = ({results}: Props) => {
 						<div className={s.row}>
 							<span className={s.muted}>P-Value:</span>
 							<span className={`${s.mono} ${s.value}`}>
-								{test.pValue.toFixed(4)}
+								{formatPValue(test.pValue)}
 							</span>
 						</div>
 

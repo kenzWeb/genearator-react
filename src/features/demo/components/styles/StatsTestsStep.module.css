@@ -1,0 +1,44 @@
+.card {
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: 24px;
+	box-shadow: var(--shadow);
+}
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+}
+.tile {
+	background: color-mix(in oklab, var(--bg) 70%, black 30%);
+	border: 1px solid color-mix(in oklab, var(--cyan) 10%, var(--border));
+	border-radius: 12px;
+	padding: 12px;
+}
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+.title {
+	font-weight: 600;
+	color: var(--text);
+}
+.ok {
+	color: var(--mint);
+	display: flex;
+}
+.bar {
+	width: 100%;
+	height: 8px;
+	border-radius: 999px;
+	overflow: hidden;
+	background: color-mix(in oklab, var(--bg) 70%, black 30%);
+	border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+}
+.fill {
+	height: 100%;
+	background: var(--cyan);
+}

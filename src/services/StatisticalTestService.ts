@@ -1,3 +1,4 @@
+import {TEST_NAMES, TEST_THRESHOLD} from '../domain/constants/tests'
 import type {StatisticalTest, TestResults} from '../types'
 
 export class StatisticalTestService {
@@ -10,10 +11,10 @@ export class StatisticalTestService {
 		const pValue = this.erfcc(statistic / Math.sqrt(2))
 
 		return {
-			name: 'Frequency Test',
-			result: pValue >= 0.01 ? 'passed' : 'failed',
+			name: TEST_NAMES.frequency,
+			result: pValue >= TEST_THRESHOLD ? 'passed' : 'failed',
 			pValue,
-			threshold: 0.01,
+			threshold: TEST_THRESHOLD,
 			description:
 				'Tests if the number of ones and zeros are approximately equal',
 		}
@@ -26,10 +27,10 @@ export class StatisticalTestService {
 
 		if (Math.abs(proportion - 0.5) >= 2 / Math.sqrt(n)) {
 			return {
-				name: 'Runs Test',
+				name: TEST_NAMES.runs,
 				result: 'failed',
 				pValue: 0,
-				threshold: 0.01,
+				threshold: TEST_THRESHOLD,
 				description:
 					'Tests the number of runs (consecutive sequences of same bit)',
 			}
@@ -53,10 +54,10 @@ export class StatisticalTestService {
 		const pValue = this.erfcc(statistic / Math.sqrt(2))
 
 		return {
-			name: 'Runs Test',
-			result: pValue >= 0.01 ? 'passed' : 'failed',
+			name: TEST_NAMES.runs,
+			result: pValue >= TEST_THRESHOLD ? 'passed' : 'failed',
 			pValue,
-			threshold: 0.01,
+			threshold: TEST_THRESHOLD,
 			description:
 				'Tests the number of runs (consecutive sequences of same bit)',
 		}
@@ -86,10 +87,10 @@ export class StatisticalTestService {
 		const pValue = this.chiSquarePValue(chiSquare, degreesOfFreedom)
 
 		return {
-			name: 'Chi-Square Test',
-			result: pValue >= 0.01 ? 'passed' : 'failed',
+			name: TEST_NAMES.chiSquare,
+			result: pValue >= TEST_THRESHOLD ? 'passed' : 'failed',
 			pValue,
-			threshold: 0.01,
+			threshold: TEST_THRESHOLD,
 			description: 'Tests the distribution of bit patterns',
 		}
 	}
@@ -111,10 +112,10 @@ export class StatisticalTestService {
 		const pValue = this.erfcc(statistic / Math.sqrt(2))
 
 		return {
-			name: 'Serial Correlation Test',
-			result: pValue >= 0.01 ? 'passed' : 'failed',
+			name: TEST_NAMES.serialCorrelation,
+			result: pValue >= TEST_THRESHOLD ? 'passed' : 'failed',
 			pValue,
-			threshold: 0.01,
+			threshold: TEST_THRESHOLD,
 			description: 'Tests for correlation between consecutive bits',
 		}
 	}

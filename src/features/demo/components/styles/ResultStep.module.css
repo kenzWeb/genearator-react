@@ -1,0 +1,51 @@
+.card {
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: 24px;
+	box-shadow: var(--shadow);
+	text-align: center;
+}
+.title {
+	font-size: 24px;
+	font-weight: 700;
+	color: var(--cyan);
+	margin-bottom: 12px;
+}
+.numbers {
+	display: flex;
+	justify-content: center;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+.num {
+	width: 64px;
+	height: 64px;
+	background: var(--cyan);
+	color: #0d1117;
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 24px;
+	font-weight: 800;
+	box-shadow: 0 0 20px rgba(0, 191, 255, 0.25);
+}
+.hashBox {
+	background: color-mix(in oklab, var(--bg) 70%, black 30%);
+	border: 1px solid color-mix(in oklab, var(--cyan) 10%, var(--border));
+	border-radius: 12px;
+	padding: 12px;
+	text-align: left;
+}
+.hashLabel {
+	color: var(--muted);
+	margin-bottom: 6px;
+}
+.hashValue {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		'Liberation Mono', 'Courier New', monospace;
+	font-size: 12px;
+	color: var(--cyan);
+	word-break: break-all;
+}

@@ -2,32 +2,36 @@ import {motion} from 'framer-motion'
 import {useState} from 'react'
 import {EntropyVisualizer} from '../components/EntropyVisualizer'
 import {TestResultsDisplay} from '../components/TestResultsDisplay'
+import {formatTimestamp} from '../domain/formatters'
+import {
+	formatMs,
+	getProgressLabel,
+	getVerificationLabel,
+} from '../domain/selectors/draw'
+import {useDrawActions} from '../features/draw/useDrawActions'
 import {useRandomGenerator} from '../hooks/useRandomGenerator'
 import s from './DrawPage.module.css'
 
 export const DrawPage = () => {
 	const {
-		generateDraw,
 		visualizationState,
+		generateDraw,
 		currentSession,
 		isGenerating,
 		verificationService,
 		rng,
 	} = useRandomGenerator()
+	const {handleGenerate, handleExport, handleExportBinary} = useDrawActions({
+		generateDraw,
+		currentSession,
+		verificationService,
+		rng,
+		isGenerating,
+	})
 	const [numbersCount, setNumbersCount] = useState(6)
 
-	const handleGenerate = async () => {
-		await generateDraw(numbersCount)
-	}
-	const handleExport = () => {
-		if (!currentSession) return
-		const blob = verificationService.exportToTextFile(currentSession.sequence)
-		verificationService.downloadFile(blob, `draw-${currentSession.id}.json`)
-	}
-	const handleExportBinary = () => {
-		const binary = verificationService.generateLargeBinarySequence(rng, 1000000)
-		const blob = verificationService.exportToBinaryFile(binary)
-		verificationService.downloadFile(blob, `binary-sequence-${Date.now()}.txt`)
+	const onGenerateClick = async () => {
+		await handleGenerate(numbersCount)
 	}
 
 	return (
@@ -68,7 +72,7 @@ export const DrawPage = () => {
 
 					<div className={s.actions}>
 						<button
-							onClick={handleGenerate}
+							onClick={onGenerateClick}
 							disabled={isGenerating}
 							className={`${s.btn} ${s.primary} ${
 								isGenerating ? s.disabled : ''
@@ -98,14 +102,7 @@ export const DrawPage = () => {
 				{visualizationState.stage !== 'idle' && (
 					<div className={s.progressWrap}>
 						<div className={s.progressHead}>
-							<span>
-								{visualizationState.stage === 'collecting' &&
-									'Сбор энтропии...'}
-								{visualizationState.stage === 'processing' &&
-									'Обработка данных...'}
-								{visualizationState.stage === 'testing' && 'Запуск тестов...'}
-								{visualizationState.stage === 'complete' && 'Завершено'}
-							</span>
+							<span>{getProgressLabel(visualizationState.stage)}</span>
 							<span style={{color: 'var(--cyan)', fontWeight: 600}}>
 								{visualizationState.progress}%
 							</span>
@@ -163,7 +160,7 @@ export const DrawPage = () => {
 								<div>
 									<div className={s.metaLabel}>Timestamp:</div>
 									<div className={s.mono} style={{marginTop: 4}}>
-										{new Date(currentSession.timestamp).toLocaleString()}
+										{formatTimestamp(currentSession.timestamp)}
 									</div>
 								</div>
 								<div style={{gridColumn: '1 / -1'}}>
@@ -183,13 +180,15 @@ export const DrawPage = () => {
 												: 'var(--error)',
 										}}
 									>
-										{currentSession.verified ? '✓ Подтверждено' : '✗ Ошибка'}
+										{getVerificationLabel(currentSession.verified)}
 									</div>
 								</div>
 								<div>
 									<div className={s.metaLabel}>Время сбора энтропии:</div>
 									<div className={s.mono} style={{marginTop: 4}}>
-										{currentSession.sequence.entropyData.collectionTime}ms
+										{formatMs(
+											currentSession.sequence.entropyData.collectionTime,
+										)}
 									</div>
 								</div>
 							</div>

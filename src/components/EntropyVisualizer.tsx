@@ -1,4 +1,6 @@
 import {motion} from 'framer-motion'
+import {entropyTypeBadgeClass} from '../domain/selectors/entropy'
+import {iconForEntropyType} from '../domain/utils/icons'
 import type {EntropySource} from '../types'
 import s from './EntropyVisualizer.module.css'
 
@@ -8,61 +10,7 @@ interface Props {
 }
 
 export const EntropyVisualizer = ({sources, isCollecting}: Props) => {
-	const getSourceIcon = (type: string) => {
-		switch (type) {
-			case 'physical':
-				return (
-					<svg
-						width={18}
-						height={18}
-						fill='none'
-						stroke='currentColor'
-						viewBox='0 0 24 24'
-					>
-						<path
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							strokeWidth={2}
-							d='M13 10V3L4 14h7v7l9-11h-7z'
-						/>
-					</svg>
-				)
-			case 'algorithmic':
-				return (
-					<svg
-						width={18}
-						height={18}
-						fill='none'
-						stroke='currentColor'
-						viewBox='0 0 24 24'
-					>
-						<path
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							strokeWidth={2}
-							d='M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z'
-						/>
-					</svg>
-				)
-			default:
-				return (
-					<svg
-						width={18}
-						height={18}
-						fill='none'
-						stroke='currentColor'
-						viewBox='0 0 24 24'
-					>
-						<path
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							strokeWidth={2}
-							d='M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4'
-						/>
-					</svg>
-				)
-		}
-	}
+	const getSourceIcon = iconForEntropyType
 
 	return (
 		<div className={s.card}>
@@ -100,15 +48,7 @@ export const EntropyVisualizer = ({sources, isCollecting}: Props) => {
 									} ${isCollecting && source.collected === 0 ? s.pulse : ''}`}
 								/>
 								<span className={s.name}>{source.name}</span>
-								<div
-									className={`${s.badge} ${
-										source.type === 'physical'
-											? s.physical
-											: source.type === 'hybrid'
-											? s.hybrid
-											: s.algorithmic
-									}`}
-								>
+								<div className={entropyTypeBadgeClass(source.type, s)}>
 									{getSourceIcon(source.type)}
 									<span>{source.type}</span>
 								</div>
