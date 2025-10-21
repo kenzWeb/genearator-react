@@ -20,11 +20,13 @@
 }
 
 .card {
-	background: var(--card);
-	border: 1px solid var(--border);
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
 	border-radius: var(--radius);
 	padding: 24px;
-	box-shadow: var(--shadow);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(60px) saturate(200%);
+	-webkit-backdrop-filter: blur(60px) saturate(200%);
 }
 .controls {
 	display: flex;
@@ -48,14 +50,22 @@
 	width: 12px;
 	height: 12px;
 	border-radius: 999px;
-	background: color-mix(in oklab, var(--bg) 70%, black 30%);
-	border: 1px solid var(--border);
-	transition: 0.2s ease;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.03);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	backdrop-filter: blur(30px);
+	-webkit-backdrop-filter: blur(30px);
 }
 .dotActive {
 	width: 28px;
-	background: var(--cyan);
-	border-color: var(--cyan);
+	background: linear-gradient(
+		90deg,
+		rgba(10, 132, 255, 0.9),
+		rgba(90, 200, 250, 0.9)
+	);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	box-shadow: 0 2px 8px rgba(10, 132, 255, 0.4),
+		inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .btns {
@@ -66,18 +76,41 @@
 	height: 40px;
 	padding: 0 16px;
 	border-radius: 10px;
-	border: 1px solid var(--border);
+	border: 1px solid rgba(255, 255, 255, 0.05);
 	color: var(--text);
-	background: var(--card);
-	transition: 0.2s ease;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(50px) saturate(200%);
+	-webkit-backdrop-filter: blur(50px) saturate(200%);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	font-weight: 600;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 .btn:hover:not(.disabled) {
-	border-color: var(--cyan);
+	border-color: rgba(10, 132, 255, 0.4);
+	background: rgba(255, 255, 255, 0.3);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(31, 38, 135, 0.25);
 }
 .primary {
-	background: var(--cyan);
-	color: #0d1117;
-	border-color: var(--cyan);
+	background: linear-gradient(
+		135deg,
+		rgba(10, 132, 255, 0.9),
+		rgba(90, 200, 250, 0.9)
+	);
+	color: white;
+	border: 1px solid rgba(255, 255, 255, 0.03);
+	box-shadow: 0 4px 16px rgba(10, 132, 255, 0.35),
+		inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.primary:hover:not(.disabled) {
+	background: linear-gradient(
+		135deg,
+		rgba(0, 81, 213, 0.95),
+		rgba(70, 180, 230, 0.95)
+	);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	box-shadow: 0 6px 20px rgba(10, 132, 255, 0.45),
+		inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 .disabled {
 	opacity: 0.6;
@@ -96,11 +129,13 @@
 }
 
 .benefits {
-	background: var(--card);
-	border: 1px solid var(--border);
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
 	border-radius: var(--radius);
 	padding: 24px;
-	box-shadow: var(--shadow);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(60px) saturate(200%);
+	-webkit-backdrop-filter: blur(60px) saturate(200%);
 }
 .benefitsTitle {
 	font-size: 20px;
@@ -119,10 +154,21 @@
 	}
 }
 .benefit {
-	background: color-mix(in oklab, var(--bg) 70%, black 30%);
-	border: 1px solid color-mix(in oklab, var(--cyan) 10%, var(--border));
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.05);
 	border-radius: 12px;
 	padding: 16px;
+	backdrop-filter: blur(50px) saturate(200%);
+	-webkit-backdrop-filter: blur(50px) saturate(200%);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.benefit:hover {
+	background: rgba(255, 255, 255, 0.3);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 16px rgba(10, 132, 255, 0.2),
+		inset 0 1px 0 rgba(255, 255, 255, 0.05);
+	border-color: rgba(10, 132, 255, 0.3);
 }
 .benefitIcon {
 	font-size: 24px;

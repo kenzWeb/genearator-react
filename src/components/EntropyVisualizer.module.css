@@ -1,10 +1,28 @@
 .card {
-	background: var(--card);
-	border: 1px solid var(--border);
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
 	border-radius: var(--radius);
 	padding: 24px;
-	box-shadow: var(--shadow);
-	backdrop-filter: blur(8px);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
+		0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+	backdrop-filter: blur(60px) saturate(200%);
+	-webkit-backdrop-filter: blur(60px) saturate(200%);
+	position: relative;
+}
+.card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(10, 132, 255, 0.3),
+		transparent
+	);
+	pointer-events: none;
 }
 .head {
 	display: flex;
@@ -28,14 +46,38 @@
 	gap: 12px;
 }
 .item {
-	background: color-mix(in oklab, var(--bg) 70%, black 30%);
-	border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.08);
 	border-radius: 12px;
 	padding: 16px;
-	transition: border-color 0.2s ease;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	backdrop-filter: blur(50px) saturate(200%);
+	-webkit-backdrop-filter: blur(50px) saturate(200%);
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4),
+		0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+	position: relative;
+}
+.item::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(255, 255, 255, 0.1),
+		transparent
+	);
+	pointer-events: none;
 }
 .item:hover {
-	border-color: color-mix(in oklab, var(--cyan) 30%, var(--border));
+	border-color: rgba(10, 132, 255, 0.5);
+	background: rgba(255, 255, 255, 0.08);
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px rgba(10, 132, 255, 0.4),
+		0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 0 30px rgba(10, 132, 255, 0.2);
 }
 
 .row {
@@ -53,11 +95,11 @@
 	width: 12px;
 	height: 12px;
 	border-radius: 999px;
-	background: color-mix(in oklab, var(--text) 30%, transparent);
+	background: rgba(0, 0, 0, 0.15);
 }
 .dotActive {
 	background: var(--mint);
-	box-shadow: 0 0 12px color-mix(in oklab, var(--mint) 50%, transparent);
+	box-shadow: 0 0 12px rgba(50, 215, 75, 0.5);
 }
 @keyframes pulse {
 	0% {
@@ -86,26 +128,29 @@
 	border-radius: 10px;
 	font-size: 12px;
 	font-weight: 600;
-	border: 1px solid;
+	border: 1px solid rgba(255, 255, 255, 0.03);
+	backdrop-filter: blur(40px);
+	-webkit-backdrop-filter: blur(40px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 .badge svg {
 	width: 18px;
 	height: 18px;
 }
 .physical {
-	background: color-mix(in oklab, var(--cyan) 10%, transparent);
+	background: rgba(10, 132, 255, 0.2);
 	color: var(--cyan);
-	border-color: color-mix(in oklab, var(--cyan) 30%, transparent);
+	border-color: rgba(10, 132, 255, 0.4);
 }
 .hybrid {
-	background: color-mix(in oklab, var(--mint) 10%, transparent);
+	background: rgba(50, 215, 75, 0.2);
 	color: var(--mint);
-	border-color: color-mix(in oklab, var(--mint) 30%, transparent);
+	border-color: rgba(50, 215, 75, 0.4);
 }
 .algorithmic {
-	background: color-mix(in oklab, var(--muted) 10%, transparent);
+	background: rgba(110, 110, 115, 0.2);
 	color: var(--muted);
-	border-color: color-mix(in oklab, var(--muted) 30%, transparent);
+	border-color: rgba(110, 110, 115, 0.4);
 }
 
 .bytes {
@@ -120,15 +165,32 @@
 	width: 100%;
 	height: 12px;
 	border-radius: 999px;
-	background: color-mix(in oklab, var(--bg) 70%, black 30%);
-	border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.05);
 	overflow: hidden;
+	backdrop-filter: blur(30px);
+	-webkit-backdrop-filter: blur(30px);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 .bar {
 	height: 100%;
-	background: var(--cyan);
+	background: linear-gradient(
+		90deg,
+		rgba(10, 132, 255, 0.95),
+		rgba(90, 200, 250, 0.95)
+	);
 	position: relative;
-	box-shadow: 0 0 10px rgba(0, 191, 255, 0.45);
+	box-shadow: 0 0 15px rgba(10, 132, 255, 0.6),
+		inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.bar::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 50%;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent);
 }
 @keyframes shine {
 	0% {

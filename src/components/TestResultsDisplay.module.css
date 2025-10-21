@@ -1,10 +1,11 @@
 .card {
-	background: var(--card);
-	border: 1px solid color-mix(in oklab, var(--cyan) 20%, var(--border));
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(10, 132, 255, 0.25);
 	border-radius: var(--radius);
 	padding: 24px;
-	box-shadow: var(--shadow);
-	backdrop-filter: blur(8px);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(60px) saturate(200%);
+	-webkit-backdrop-filter: blur(60px) saturate(200%);
 }
 .head {
 	display: flex;
@@ -23,17 +24,20 @@
 	padding: 8px 12px;
 	border-radius: 12px;
 	font-weight: 700;
-	border: 1px solid;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	backdrop-filter: blur(40px);
+	-webkit-backdrop-filter: blur(40px);
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 .ok {
-	background: color-mix(in oklab, var(--mint) 20%, transparent);
+	background: rgba(50, 215, 75, 0.25);
 	color: var(--mint);
-	border-color: color-mix(in oklab, var(--mint) 40%, transparent);
+	border-color: rgba(50, 215, 75, 0.5);
 }
 .bad {
-	background: color-mix(in oklab, var(--error) 20%, transparent);
+	background: rgba(255, 59, 48, 0.25);
 	color: var(--error);
-	border-color: color-mix(in oklab, var(--error) 40%, transparent);
+	border-color: rgba(255, 59, 48, 0.5);
 }
 
 .grid {
@@ -48,10 +52,13 @@
 	}
 }
 .tile {
-	background: color-mix(in oklab, var(--bg) 70%, black 30%);
-	border: 1px solid color-mix(in oklab, var(--cyan) 10%, var(--border));
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.03);
 	border-radius: 12px;
 	padding: 16px;
+	backdrop-filter: blur(50px);
+	-webkit-backdrop-filter: blur(50px);
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 .tileHead {
 	display: flex;
@@ -67,13 +74,14 @@
 	font-size: 13px;
 	padding: 4px 8px;
 	border-radius: 8px;
+	font-weight: 600;
 }
 .pass {
-	background: color-mix(in oklab, var(--mint) 15%, transparent);
+	background: rgba(50, 215, 75, 0.15);
 	color: var(--mint);
 }
 .fail {
-	background: color-mix(in oklab, var(--error) 15%, transparent);
+	background: rgba(255, 59, 48, 0.15);
 	color: var(--error);
 }
 .tileDesc {
@@ -104,10 +112,13 @@
 }
 
 .chartCard {
-	background: color-mix(in oklab, var(--bg) 70%, black 30%);
-	border: 1px solid color-mix(in oklab, var(--cyan) 10%, var(--border));
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.03);
 	border-radius: 12px;
 	padding: 16px;
+	backdrop-filter: blur(50px);
+	-webkit-backdrop-filter: blur(50px);
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 .chartTitle {
 	font-size: 14px;

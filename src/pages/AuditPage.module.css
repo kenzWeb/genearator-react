@@ -20,26 +20,33 @@
 }
 
 .card {
-	background: var(--card);
-	border: 1px solid var(--border);
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
 	border-radius: var(--radius);
 	padding: 24px;
-	box-shadow: var(--shadow);
-	backdrop-filter: blur(8px);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(60px) saturate(200%);
+	-webkit-backdrop-filter: blur(60px) saturate(200%);
 }
 .inner {
 	max-width: 640px;
 	margin: 0 auto;
 }
 .drop {
-	border: 2px dashed color-mix(in oklab, var(--cyan) 30%, var(--border));
+	border: 2px dashed rgba(10, 132, 255, 0.4);
 	border-radius: 16px;
 	padding: 48px;
 	text-align: center;
-	transition: border-color 0.2s ease;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(40px);
+	-webkit-backdrop-filter: blur(40px);
 }
 .drop:hover {
-	border-color: color-mix(in oklab, var(--cyan) 60%, var(--border));
+	border-color: rgba(10, 132, 255, 0.7);
+	background: rgba(255, 255, 255, 0.03);
+	transform: scale(1.01);
+	box-shadow: 0 8px 24px rgba(10, 132, 255, 0.15);
 }
 .hidden {
 	display: none;
@@ -58,7 +65,12 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: color-mix(in oklab, var(--cyan) 15%, transparent);
+	background: rgba(10, 132, 255, 0.15);
+	color: var(--cyan);
+	box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2),
+		inset 0 1px 0 rgba(255, 255, 255, 0.03);
+	backdrop-filter: blur(30px);
+	-webkit-backdrop-filter: blur(30px);
 }
 .fileTitle {
 	font-size: 18px;
@@ -75,12 +87,26 @@
 	padding: 0 20px;
 	border-radius: 12px;
 	font-weight: 700;
-	background: var(--cyan);
-	color: #0d1117;
-	transition: 0.2s ease;
+	background: linear-gradient(
+		135deg,
+		rgba(10, 132, 255, 0.9),
+		rgba(90, 200, 250, 0.9)
+	);
+	color: white;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	box-shadow: 0 4px 16px rgba(10, 132, 255, 0.35),
+		inset 0 1px 0 rgba(255, 255, 255, 0.3);
+	border: 1px solid rgba(255, 255, 255, 0.05);
 }
 .uploadBtn:hover {
-	filter: brightness(0.95);
+	background: linear-gradient(
+		135deg,
+		rgba(0, 81, 213, 0.95),
+		rgba(70, 180, 230, 0.95)
+	);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(10, 132, 255, 0.45),
+		inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 .uploadDisabled {
 	display: flex;
@@ -88,17 +114,24 @@
 	height: 48px;
 	padding: 0 20px;
 	border-radius: 12px;
-	background: var(--card);
-	border: 1px solid color-mix(in oklab, var(--cyan) 30%, var(--border));
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	backdrop-filter: blur(40px);
+	-webkit-backdrop-filter: blur(40px);
+	opacity: 0.6;
+	cursor: not-allowed;
 }
 
 .info {
 	margin-top: 16px;
-	background: color-mix(in oklab, var(--bg) 70%, black 30%);
-	border: 1px solid color-mix(in oklab, var(--cyan) 10%, var(--border));
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.08);
 	border-radius: 12px;
 	padding: 12px;
 	text-align: left;
+	backdrop-filter: blur(50px) saturate(200%);
+	-webkit-backdrop-filter: blur(50px) saturate(200%);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 .infoTitle {
 	font-weight: 700;
@@ -113,11 +146,13 @@
 }
 
 .progressCard {
-	background: var(--card);
-	border: 1px solid color-mix(in oklab, var(--cyan) 20%, var(--border));
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
 	border-radius: var(--radius);
 	padding: 16px;
-	box-shadow: var(--shadow);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(60px) saturate(200%);
+	-webkit-backdrop-filter: blur(60px) saturate(200%);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -141,11 +176,13 @@
 }
 
 .resultCard {
-	background: var(--card);
-	border: 1px solid color-mix(in oklab, var(--cyan) 20%, var(--border));
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
 	border-radius: var(--radius);
 	padding: 16px;
-	box-shadow: var(--shadow);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(60px) saturate(200%);
+	-webkit-backdrop-filter: blur(60px) saturate(200%);
 }
 .resultTitle {
 	font-size: 20px;

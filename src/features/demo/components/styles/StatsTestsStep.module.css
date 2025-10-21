@@ -1,9 +1,11 @@
 .card {
-	background: var(--card);
-	border: 1px solid var(--border);
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
 	border-radius: var(--radius);
 	padding: 24px;
-	box-shadow: var(--shadow);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(60px) saturate(200%);
+	-webkit-backdrop-filter: blur(60px) saturate(200%);
 }
 .grid {
 	display: grid;
@@ -11,10 +13,13 @@
 	gap: 12px;
 }
 .tile {
-	background: color-mix(in oklab, var(--bg) 70%, black 30%);
-	border: 1px solid color-mix(in oklab, var(--cyan) 10%, var(--border));
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.05);
 	border-radius: 12px;
 	padding: 12px;
+	backdrop-filter: blur(50px) saturate(200%);
+	-webkit-backdrop-filter: blur(50px) saturate(200%);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 .row {
 	display: flex;
@@ -35,10 +40,26 @@
 	height: 8px;
 	border-radius: 999px;
 	overflow: hidden;
-	background: color-mix(in oklab, var(--bg) 70%, black 30%);
-	border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.05);
+	position: relative;
 }
 .fill {
 	height: 100%;
-	background: var(--cyan);
+	background: linear-gradient(
+		90deg,
+		rgba(10, 132, 255, 0.9),
+		rgba(90, 200, 250, 0.9)
+	);
+	position: relative;
+}
+.fill::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 50%;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent);
+	pointer-events: none;
 }

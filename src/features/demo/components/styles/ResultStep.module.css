@@ -1,9 +1,11 @@
 .card {
-	background: var(--card);
-	border: 1px solid var(--border);
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
 	border-radius: var(--radius);
 	padding: 24px;
-	box-shadow: var(--shadow);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(60px) saturate(200%);
+	-webkit-backdrop-filter: blur(60px) saturate(200%);
 	text-align: center;
 }
 .title {
@@ -21,22 +23,31 @@
 .num {
 	width: 64px;
 	height: 64px;
-	background: var(--cyan);
-	color: #0d1117;
+	background: linear-gradient(
+		135deg,
+		rgba(10, 132, 255, 0.9),
+		rgba(90, 200, 250, 0.9)
+	);
+	color: white;
 	border-radius: 12px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-size: 24px;
 	font-weight: 800;
-	box-shadow: 0 0 20px rgba(0, 191, 255, 0.25);
+	box-shadow: 0 4px 16px rgba(10, 132, 255, 0.35),
+		inset 0 1px 0 rgba(255, 255, 255, 0.3);
+	border: 1px solid rgba(255, 255, 255, 0.03);
 }
 .hashBox {
-	background: color-mix(in oklab, var(--bg) 70%, black 30%);
-	border: 1px solid color-mix(in oklab, var(--cyan) 10%, var(--border));
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.05);
 	border-radius: 12px;
 	padding: 12px;
 	text-align: left;
+	backdrop-filter: blur(50px) saturate(200%);
+	-webkit-backdrop-filter: blur(50px) saturate(200%);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 .hashLabel {
 	color: var(--muted);
