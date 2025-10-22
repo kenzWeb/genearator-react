@@ -1,16 +1,14 @@
 import {readFileAsText} from '../../core/converters'
-import {
-	analysisService,
-	auditService,
-	type AuditAnalysisResponse,
-} from '../../lib/api'
+import type {TestResults} from '../../core/domain/models'
+import {mapOutcomesToTestResults} from '../../core/mappers'
+import {analysisService, auditService} from '../../lib/api'
 
 interface AuditSession {
 	auditId: string
 	filename: string
 	fileSize: number
 	timestamp: string
-	testResults?: AuditAnalysisResponse['test_results']
+	testResults?: TestResults
 }
 
 export function useAuditAnalysis() {
@@ -24,12 +22,14 @@ export function useAuditAnalysis() {
 			},
 		)
 
+		const testResults = mapOutcomesToTestResults(analysisResult.outcomes)
+
 		return {
 			auditId: uploadResponse.audit_id,
 			filename: uploadResponse.filename,
 			fileSize: uploadResponse.file_size,
 			timestamp: uploadResponse.created_at,
-			testResults: analysisResult.test_results,
+			testResults,
 		}
 	}
 

@@ -59,19 +59,25 @@ export interface EntropyMetrics {
 	spectral_deviation_percent: number
 }
 
-export interface GenerationRequest {
-	count: number
-	max?: number
-	duration?: number
+export interface EntropyParameters {
+	duration_ms?: number
+	hum_amplitude?: number
 	noise_amplitude?: number
 	spike_density?: number
+	spike_amplitude?: number
+}
+
+export interface GenerationRequest {
+	length: number
 	noise_seed?: number | null
+	parameters?: EntropyParameters
 }
 
 export interface GenerationResponse {
 	run_id: string
-	data: string
-	test_results?: TestResults
+	format: 'hex' | 'ints'
+	data: string | number[]
+	entropy_metrics: EntropyMetrics
 }
 
 export interface ExportRequest {

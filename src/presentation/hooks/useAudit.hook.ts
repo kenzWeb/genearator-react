@@ -1,11 +1,11 @@
 import {useState} from 'react'
 import {useAuditAnalysis} from '../../application/use-cases/audit.use-case'
-import type {AuditAnalysisResponse} from '../../lib/api'
+import type {TestResults} from '../../core/domain/models'
 
 interface UseAuditReturn {
 	isAnalyzing: boolean
 	fileName: string
-	testResults: AuditAnalysisResponse['test_results'] | null
+	testResults: TestResults | null
 	handleFileUpload: (file: File) => Promise<void>
 	reset: () => void
 }
@@ -13,9 +13,7 @@ interface UseAuditReturn {
 export const useAudit = (): UseAuditReturn => {
 	const [isAnalyzing, setIsAnalyzing] = useState(false)
 	const [fileName, setFileName] = useState<string>('')
-	const [testResults, setTestResults] = useState<
-		AuditAnalysisResponse['test_results'] | null
-	>(null)
+	const [testResults, setTestResults] = useState<TestResults | null>(null)
 
 	const {analyzeFile} = useAuditAnalysis()
 

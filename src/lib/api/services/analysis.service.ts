@@ -1,21 +1,28 @@
 import {API_CONFIG} from '../../../config/app.config'
-import type {TestResults} from '../../../core/domain/models'
 import {apiClient} from '../client'
 
 export interface AnalysisRequest {
 	tests?: string[]
 }
 
+export interface TestOutcomeView {
+	name: string
+	passed: boolean
+	statistic: number
+	threshold?: number
+	details?: Record<string, unknown>
+}
+
 export interface RunAnalysisResponse {
 	run_id: string
-	test_results: TestResults
-	created_at: string
+	export_path?: string
+	outcomes: TestOutcomeView[]
 }
 
 export interface AuditAnalysisResponse {
 	audit_id: string
-	test_results: TestResults
-	created_at: string
+	data_hash: string
+	outcomes: TestOutcomeView[]
 }
 
 export const analysisService = {

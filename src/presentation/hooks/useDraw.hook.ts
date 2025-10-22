@@ -3,15 +3,14 @@ import {
 	useDrawExport,
 	useDrawGeneration,
 } from '../../application/use-cases/draw.use-case'
-import type {EntropyMetrics} from '../../core/domain/models'
-import type {RunAnalysisResponse} from '../../lib/api'
+import type {EntropyMetrics, TestResults} from '../../core/domain/models'
 
 interface DrawSession {
 	runId: string
 	numbers: number[]
 	timestamp: string
 	entropyMetrics: EntropyMetrics
-	testResults?: RunAnalysisResponse['test_results']
+	testResults?: TestResults
 	rawData?: string
 }
 

@@ -5,19 +5,16 @@ import {
 	downloadJSON,
 	parseNumbersFromHex,
 } from '../../core/converters'
-import type {EntropyMetrics} from '../../core/domain/models'
-import {
-	analysisService,
-	rngService,
-	type RunAnalysisResponse,
-} from '../../lib/api'
+import type {EntropyMetrics, TestResults} from '../../core/domain/models'
+import {mapOutcomesToTestResults} from '../../core/mappers'
+import {analysisService, rngService} from '../../lib/api'
 
 interface DrawSession {
 	runId: string
 	numbers: number[]
 	timestamp: string
 	entropyMetrics: EntropyMetrics
-	testResults?: RunAnalysisResponse['test_results']
+	testResults?: TestResults
 	rawData?: string
 }
 
@@ -31,38 +28,39 @@ export function useDrawGeneration() {
 
 		const response = await rngService.generate(
 			{
-				count: bytesNeeded,
-				duration: 250,
-				noise_amplitude: 0.7,
-				spike_density: 0.05,
+				length: bytesNeeded,
 				noise_seed: COMPETITION_REQUIREMENTS.USE_RANDOM_SEED ? null : undefined,
+				parameters: {
+					duration_ms: 250,
+					noise_amplitude: 0.7,
+					spike_density: 0.05,
+				},
 			},
 			'hex',
 		)
 
-		const numbers = parseNumbersFromHex(
-			response.data as string,
-			count,
-			RNG_CONSTANTS.MAX_NUMBER_VALUE,
-		)
+		const numbers = parseNumbersFromHex(response.data as string, count)
 
 		const analysisResult = await analysisService.analyzeRun(response.run_id, {
 			tests: ['frequency', 'runs', 'chi_square'],
 		})
+
+		const metrics = response.entropy_metrics
+		const testResults = mapOutcomesToTestResults(analysisResult.outcomes)
 
 		return {
 			runId: response.run_id,
 			numbers,
 			timestamp: new Date().toISOString(),
 			entropyMetrics: {
-				snr: 34.5,
-				lyapunov: 0.91,
-				spectralDeviation: 2.8,
-				snr_db: 34.5,
-				lyapunov_exponent: 0.91,
-				spectral_deviation_percent: 2.8,
+				snr: metrics.snr_db,
+				lyapunov: metrics.lyapunov_exponent,
+				spectralDeviation: metrics.spectral_deviation_percent,
+				snr_db: metrics.snr_db,
+				lyapunov_exponent: metrics.lyapunov_exponent,
+				spectral_deviation_percent: metrics.spectral_deviation_percent,
 			},
-			testResults: analysisResult.test_results,
+			testResults,
 			rawData: response.data as string,
 		}
 	}
