@@ -6,12 +6,42 @@
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 	backdrop-filter: blur(60px) saturate(200%);
 	-webkit-backdrop-filter: blur(60px) saturate(200%);
+	animation: cardSlideUp 0.6s ease-out;
 }
+
+@keyframes cardSlideUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.header {
+	margin-bottom: 16px;
+	animation: headerFadeIn 0.8s ease-out;
+}
+
+@keyframes headerFadeIn {
+	from {
+		opacity: 0;
+		transform: translateX(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
 .grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 12px;
 }
+
 .tile {
 	background: rgba(255, 255, 255, 0.05);
 	border: 1px solid rgba(255, 255, 255, 0.05);
@@ -20,21 +50,146 @@
 	backdrop-filter: blur(50px) saturate(200%);
 	-webkit-backdrop-filter: blur(50px) saturate(200%);
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
 }
+
+.tile::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(10, 132, 255, 0.1),
+		transparent
+	);
+	animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+	0% {
+		left: -100%;
+	}
+	50%,
+	100% {
+		left: 100%;
+	}
+}
+
+.tile:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 24px rgba(10, 132, 255, 0.3);
+	border-color: rgba(10, 132, 255, 0.3);
+}
+
 .row {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: space-between;
 	margin-bottom: 8px;
+	gap: 8px;
 }
+
 .title {
 	font-weight: 600;
+	font-size: 14px;
 	color: var(--text);
+	margin-bottom: 4px;
+	display: block;
+	animation: titleGlow 2s ease-in-out infinite;
 }
+
+@keyframes titleGlow {
+	0%,
+	100% {
+		text-shadow: 0 0 5px rgba(10, 132, 255, 0.3);
+	}
+	50% {
+		text-shadow: 0 0 10px rgba(10, 132, 255, 0.5);
+	}
+}
+
+.description {
+	font-size: 12px;
+	color: var(--muted);
+	line-height: 1.4;
+}
+
 .ok {
 	color: var(--mint);
 	display: flex;
+	flex-shrink: 0;
+	animation: checkBounce 0.6s ease-out;
 }
+
+@keyframes checkBounce {
+	0% {
+		transform: scale(0);
+		opacity: 0;
+	}
+	50% {
+		transform: scale(1.2);
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+.fail {
+	color: var(--error);
+	display: flex;
+	flex-shrink: 0;
+	animation: errorShake 0.5s ease-out;
+}
+
+@keyframes errorShake {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(-5px);
+	}
+	75% {
+		transform: translateX(5px);
+	}
+}
+
+.meta {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 12px;
+	margin-bottom: 8px;
+}
+
+.label {
+	color: var(--muted);
+}
+
+.value {
+	color: var(--cyan);
+	font-weight: 600;
+	font-family: ui-monospace, monospace;
+	animation: valuePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes valuePulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.7;
+	}
+}
+
 .bar {
 	width: 100%;
 	height: 8px;
@@ -43,7 +198,9 @@
 	background: rgba(255, 255, 255, 0.05);
 	border: 1px solid rgba(255, 255, 255, 0.05);
 	position: relative;
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 .fill {
 	height: 100%;
 	background: linear-gradient(
@@ -52,8 +209,64 @@
 		rgba(90, 200, 250, 0.9)
 	);
 	position: relative;
+	box-shadow: 0 0 10px rgba(10, 132, 255, 0.6);
+	animation: fillGlow 2s ease-in-out infinite;
 }
+
+@keyframes fillGlow {
+	0%,
+	100% {
+		box-shadow: 0 0 10px rgba(10, 132, 255, 0.6);
+	}
+	50% {
+		box-shadow: 0 0 20px rgba(10, 132, 255, 0.9);
+	}
+}
+
 .fill::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 50%;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent);
+	pointer-events: none;
+	animation: fillShine 2s linear infinite;
+}
+
+@keyframes fillShine {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(200%);
+	}
+}
+
+.fillError {
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		rgba(239, 68, 68, 0.9),
+		rgba(248, 113, 113, 0.9)
+	);
+	position: relative;
+	box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+	animation: errorPulse 1s ease-in-out infinite;
+}
+
+@keyframes errorPulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.7;
+	}
+}
+
+.fillError::after {
 	content: '';
 	position: absolute;
 	top: 0;

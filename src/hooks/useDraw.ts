@@ -45,7 +45,7 @@ export const useDraw = (): UseDrawReturn => {
 			setStage('generating')
 			setProgress(10)
 
-			const minBytesForExport = 125000 
+			const minBytesForExport = 125000
 			const bytesNeeded = Math.max(count * 4, minBytesForExport)
 
 			console.log(
@@ -134,7 +134,6 @@ export const useDraw = (): UseDrawReturn => {
 		} catch (error: unknown) {
 			console.error('Ошибка экспорта бинарных данных:', error)
 
-			// Обработка специфичной ошибки от API
 			if (error && typeof error === 'object' && 'response' in error) {
 				const axiosError = error as {
 					response?: {

@@ -7,19 +7,74 @@
 	backdrop-filter: blur(60px) saturate(200%);
 	-webkit-backdrop-filter: blur(60px) saturate(200%);
 	text-align: center;
+	animation: cardZoomIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.title {
-	font-size: 24px;
-	font-weight: 700;
-	color: var(--cyan);
-	margin-bottom: 12px;
+
+@keyframes cardZoomIn {
+	from {
+		opacity: 0;
+		transform: scale(0.8) rotateX(-15deg);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1) rotateX(0);
+	}
 }
-.numbers {
+
+.titleWrapper {
 	display: flex;
+	align-items: center;
 	justify-content: center;
 	gap: 12px;
 	margin-bottom: 16px;
 }
+
+.titleIcon {
+	color: var(--cyan);
+	animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+	0%,
+	100% {
+		transform: translateY(0) rotate(0deg);
+	}
+	25% {
+		transform: translateY(-5px) rotate(-5deg);
+	}
+	50% {
+		transform: translateY(0) rotate(0deg);
+	}
+	75% {
+		transform: translateY(-5px) rotate(5deg);
+	}
+}
+
+.title {
+	font-size: 22px;
+	font-weight: 700;
+	color: var(--cyan);
+	animation: titleGlow 2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+	0%,
+	100% {
+		text-shadow: 0 0 20px rgba(10, 132, 255, 0.5);
+	}
+	50% {
+		text-shadow: 0 0 30px rgba(10, 132, 255, 0.8);
+	}
+}
+
+.numbers {
+	display: flex;
+	justify-content: center;
+	gap: 12px;
+	margin-bottom: 24px;
+	perspective: 1000px;
+}
+
 .num {
 	width: 64px;
 	height: 64px;
@@ -38,25 +93,290 @@
 	box-shadow: 0 4px 16px rgba(10, 132, 255, 0.35),
 		inset 0 1px 0 rgba(255, 255, 255, 0.3);
 	border: 1px solid rgba(255, 255, 255, 0.03);
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	animation: numberPulse 2s ease-in-out infinite;
 }
-.hashBox {
+
+@keyframes numberPulse {
+	0%,
+	100% {
+		box-shadow: 0 4px 16px rgba(10, 132, 255, 0.35),
+			inset 0 1px 0 rgba(255, 255, 255, 0.3);
+	}
+	50% {
+		box-shadow: 0 6px 24px rgba(10, 132, 255, 0.6),
+			inset 0 1px 0 rgba(255, 255, 255, 0.5);
+	}
+}
+
+.num::before {
+	content: '';
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+	background: linear-gradient(
+		45deg,
+		transparent,
+		rgba(255, 255, 255, 0.3),
+		transparent
+	);
+	animation: numShine 3s linear infinite;
+}
+
+@keyframes numShine {
+	0% {
+		transform: translateX(-100%) translateY(-100%) rotate(45deg);
+	}
+	100% {
+		transform: translateX(100%) translateY(100%) rotate(45deg);
+	}
+}
+
+.metricsGrid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 12px;
+	margin-bottom: 24px;
+}
+
+.metricItem {
 	background: rgba(255, 255, 255, 0.05);
 	border: 1px solid rgba(255, 255, 255, 0.05);
-	border-radius: 12px;
-	padding: 12px;
+	border-radius: 10px;
+	padding: 10px 12px;
 	text-align: left;
-	backdrop-filter: blur(50px) saturate(200%);
-	-webkit-backdrop-filter: blur(50px) saturate(200%);
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	backdrop-filter: blur(50px);
+	transition: all 0.3s ease;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
 }
-.hashLabel {
+
+.metricItem::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(10, 132, 255, 0.1),
+		transparent
+	);
+	animation: metricSweep 4s ease-in-out infinite;
+}
+
+@keyframes metricSweep {
+	0% {
+		left: -100%;
+	}
+	50%,
+	100% {
+		left: 100%;
+	}
+}
+
+.metricItem:hover {
+	transform: translateY(-2px);
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(10, 132, 255, 0.3);
+	box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+}
+
+.metricLabel {
+	display: block;
+	font-size: 11px;
 	color: var(--muted);
-	margin-bottom: 6px;
+	margin-bottom: 4px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
 }
-.hashValue {
-	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-		'Liberation Mono', 'Courier New', monospace;
-	font-size: 12px;
+
+.metricValue {
+	display: block;
+	font-size: 13px;
 	color: var(--cyan);
-	word-break: break-all;
+	font-weight: 600;
+	font-family: ui-monospace, monospace;
+	animation: metricFlicker 3s ease-in-out infinite;
+}
+
+@keyframes metricFlicker {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.8;
+	}
+}
+
+.metricValueSuccess {
+	display: block;
+	font-size: 13px;
+	color: var(--mint);
+	font-weight: 700;
+	animation: successBounce 2s ease-in-out infinite;
+}
+
+@keyframes successBounce {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.05);
+	}
+}
+
+.exportSection {
+	margin-bottom: 20px;
+}
+
+.exportTitle {
+	font-size: 16px;
+	font-weight: 700;
+	color: var(--text);
+	margin-bottom: 12px;
+	text-align: left;
+	animation: titleSlideIn 0.6s ease-out;
+}
+
+@keyframes titleSlideIn {
+	from {
+		opacity: 0;
+		transform: translateX(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.exportButtons {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+}
+
+.exportBtn {
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 12px;
+	padding: 16px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	text-align: left;
+	color: var(--cyan);
+	backdrop-filter: blur(50px);
+	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+}
+
+.exportBtn::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	background: radial-gradient(circle, rgba(10, 132, 255, 0.3), transparent);
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	transition: width 0.6s ease, height 0.6s ease;
+}
+
+.exportBtn:hover::before {
+	width: 300px;
+	height: 300px;
+}
+
+.exportBtn:hover {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: var(--cyan);
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px rgba(10, 132, 255, 0.3);
+}
+
+.exportBtn:active {
+	transform: translateY(0);
+}
+
+.exportBtnTitle {
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--text);
+	margin-bottom: 4px;
+}
+
+.exportBtnDesc {
+	font-size: 12px;
+	color: var(--muted);
+	line-height: 1.4;
+}
+
+.apiNote {
+	background: rgba(10, 132, 255, 0.1);
+	border: 1px solid rgba(10, 132, 255, 0.3);
+	border-radius: 8px;
+	padding: 12px;
+	font-size: 13px;
+	color: var(--cyan);
+	text-align: left;
+	font-family: ui-monospace, monospace;
+	backdrop-filter: blur(50px);
+	animation: noteBlink 3s ease-in-out infinite;
+	position: relative;
+	overflow: hidden;
+}
+
+@keyframes noteBlink {
+	0%,
+	100% {
+		border-color: rgba(10, 132, 255, 0.3);
+		box-shadow: 0 0 10px rgba(10, 132, 255, 0.2);
+	}
+	50% {
+		border-color: rgba(10, 132, 255, 0.5);
+		box-shadow: 0 0 20px rgba(10, 132, 255, 0.4);
+	}
+}
+
+.apiNote::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(10, 132, 255, 0.2),
+		transparent
+	);
+	animation: noteSlide 4s linear infinite;
+}
+
+@keyframes noteSlide {
+	0% {
+		left: -100%;
+	}
+	100% {
+		left: 100%;
+	}
+}
+
+.apiNote strong {
+	color: var(--text);
+	font-weight: 600;
 }
