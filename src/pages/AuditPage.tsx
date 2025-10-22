@@ -1,8 +1,7 @@
 import {motion} from 'framer-motion'
 import {Upload} from 'lucide-react'
 import {TestResultsDisplay} from '../components/TestResultsDisplay'
-import {useAudit} from '../hooks/useAudit'
-import {mapTestOutcomesToResults} from '../utils/testMappers'
+import {useAudit} from '../presentation/hooks'
 import s from './AuditPage.module.css'
 
 export const AuditPage = () => {
@@ -87,7 +86,7 @@ export const AuditPage = () => {
 
 			{testResults && !isAnalyzing && (
 				<motion.div initial={{opacity: 0, y: 20}} animate={{opacity: 1, y: 0}}>
-					<TestResultsDisplay results={mapTestOutcomesToResults(testResults)} />
+					<TestResultsDisplay results={testResults} />
 				</motion.div>
 			)}
 

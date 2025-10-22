@@ -2,9 +2,8 @@ import {motion} from 'framer-motion'
 import {useState} from 'react'
 import {EntropyVisualizer} from '../components/EntropyVisualizer'
 import {TestResultsDisplay} from '../components/TestResultsDisplay'
-import {useDraw} from '../hooks/useDraw'
-import {mapEntropyMetricsToSources} from '../utils/entropyMappers'
-import {mapTestOutcomesToResults} from '../utils/testMappers'
+import {mapEntropyMetricsToSources} from '../core/mappers'
+import {useDraw} from '../presentation/hooks'
 import s from './DrawPage.module.css'
 
 export const DrawPage = () => {
@@ -220,12 +219,13 @@ export const DrawPage = () => {
 										style={{
 											marginTop: 4,
 											fontWeight: 700,
-											color: currentSession.testResults?.every((t) => t.passed)
-												? 'var(--mint)'
-												: 'var(--error)',
+											color:
+												currentSession.testResults?.overall === 'passed'
+													? 'var(--mint)'
+													: 'var(--error)',
 										}}
 									>
-										{currentSession.testResults?.every((t) => t.passed)
+										{currentSession.testResults?.overall === 'passed'
 											? '✓ Все тесты'
 											: '✗ Есть ошибки'}
 									</div>
@@ -240,9 +240,7 @@ export const DrawPage = () => {
 					/>
 
 					{currentSession.testResults && (
-						<TestResultsDisplay
-							results={mapTestOutcomesToResults(currentSession.testResults)}
-						/>
+						<TestResultsDisplay results={currentSession.testResults} />
 					)}
 				</>
 			)}
