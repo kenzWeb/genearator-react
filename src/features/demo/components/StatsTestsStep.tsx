@@ -24,7 +24,7 @@ const demoTests = [
 	{
 		name: 'Serial Correlation',
 		passed: true,
-		pValue: 0.234,
+		pValue: 0.85,
 		description: 'Проверка корреляции между битами',
 	},
 ]
