@@ -51,7 +51,7 @@ export const DrawPage = () => {
 							<input
 								type='number'
 								min='1'
-								max='20'
+								max='1000000'
 								value={numbersCount}
 								onChange={(e) => setNumbersCount(parseInt(e.target.value) || 1)}
 								className={s.input}
@@ -62,9 +62,9 @@ export const DrawPage = () => {
 									type='button'
 									className={s.spinUp}
 									onClick={() =>
-										setNumbersCount(Math.min(20, numbersCount + 1))
+										setNumbersCount(Math.min(1000000, numbersCount + 1))
 									}
-									disabled={isGenerating || numbersCount >= 20}
+									disabled={isGenerating || numbersCount >= 1000000}
 									aria-label='Увеличить'
 								>
 									<svg

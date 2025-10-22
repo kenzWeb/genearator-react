@@ -122,6 +122,7 @@ export const useDraw = (): UseDrawReturn => {
 
 		try {
 			console.log('Начало экспорта для run_id:', currentSession.runId)
+			// Требование конкурса: экспорт 1M битов для NIST STS/Dieharder/TestU01
 			const blob = await rngService.exportRun(currentSession.runId, 1000000)
 			console.log('Получен blob:', blob.size, 'bytes, type:', blob.type)
 
