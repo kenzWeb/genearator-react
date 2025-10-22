@@ -1,0 +1,25 @@
+.metaGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 16px;
+	padding: 16px;
+	background: rgba(255, 255, 255, 0.02);
+	border-radius: 12px;
+	border: 1px solid rgba(0, 255, 255, 0.1);
+	margin-top: 16px;
+}
+
+.metaLabel {
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: var(--text-secondary);
+	margin-bottom: 4px;
+}
+
+.mono {
+	font-family: 'Courier New', monospace;
+	font-size: 14px;
+	color: var(--text-primary);
+	margin-top: 4px;
+}

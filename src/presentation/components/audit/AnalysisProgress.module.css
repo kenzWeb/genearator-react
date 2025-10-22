@@ -1,0 +1,30 @@
+.progressCard {
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 16px;
+	padding: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+}
+
+.spinner {
+	width: 24px;
+	height: 24px;
+	border: 3px solid rgba(255, 255, 255, 0.1);
+	border-top-color: var(--cyan);
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.progressText {
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.8);
+}

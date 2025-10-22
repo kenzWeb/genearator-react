@@ -1,0 +1,65 @@
+.resultCard {
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid rgba(0, 255, 255, 0.1);
+	border-radius: 16px;
+	padding: 24px;
+	margin-top: 24px;
+}
+
+.title {
+	font-size: 22px;
+	font-weight: 700;
+	color: var(--cyan);
+	margin-bottom: 16px;
+}
+
+.kpiWrap {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-bottom: 24px;
+}
+
+.kpi {
+	min-width: 60px;
+	height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(
+		135deg,
+		rgba(0, 255, 255, 0.1),
+		rgba(0, 255, 170, 0.1)
+	);
+	border: 2px solid rgba(0, 255, 255, 0.3);
+	border-radius: 12px;
+	font-size: 22px;
+	font-weight: 700;
+	color: var(--cyan);
+}
+
+.meta {
+	border-top: 1px solid rgba(255, 255, 255, 0.05);
+	padding-top: 16px;
+}
+
+.metaGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 16px;
+}
+
+.metaLabel {
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: var(--text-secondary);
+	margin-bottom: 4px;
+}
+
+.mono {
+	font-family: 'Courier New', monospace;
+	font-size: 13px;
+	color: var(--text-primary);
+	word-break: break-all;
+}

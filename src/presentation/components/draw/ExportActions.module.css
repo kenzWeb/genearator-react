@@ -1,0 +1,36 @@
+.actions {
+	display: flex;
+	gap: 12px;
+	margin-top: 16px;
+}
+
+.btn {
+	padding: 12px 24px;
+	border-radius: 8px;
+	border: none;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.success {
+	background: var(--mint);
+	color: var(--bg-primary);
+}
+
+.success:hover {
+	background: var(--mint-hover);
+	transform: translateY(-2px);
+}
+
+.outline {
+	background: transparent;
+	border: 2px solid var(--cyan);
+	color: var(--cyan);
+}
+
+.outline:hover {
+	background: rgba(0, 255, 255, 0.1);
+	transform: translateY(-2px);
+}

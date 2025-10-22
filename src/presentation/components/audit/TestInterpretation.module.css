@@ -1,0 +1,30 @@
+.resultCard {
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 16px;
+	padding: 32px;
+	backdrop-filter: blur(20px);
+}
+
+.resultTitle {
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--cyan);
+	margin-bottom: 20px;
+}
+
+.explain {
+	display: grid;
+	gap: 16px;
+}
+
+.explain p {
+	font-size: 14px;
+	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.accent {
+	color: var(--cyan);
+	font-weight: 600;
+}

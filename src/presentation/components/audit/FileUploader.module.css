@@ -1,0 +1,120 @@
+.card {
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 16px;
+	padding: 24px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(60px) saturate(200%);
+}
+
+.inner {
+	max-width: 640px;
+	margin: 0 auto;
+}
+
+.drop {
+	border: 2px dashed rgba(10, 132, 255, 0.4);
+	border-radius: 16px;
+	padding: 48px;
+	text-align: center;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(40px);
+}
+
+.drop:hover {
+	border-color: rgba(10, 132, 255, 0.7);
+	background: rgba(255, 255, 255, 0.03);
+	transform: scale(1.01);
+	box-shadow: 0 8px 24px rgba(10, 132, 255, 0.15);
+}
+
+.hidden {
+	display: none;
+}
+
+.label {
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+}
+
+.icon {
+	width: 64px;
+	height: 64px;
+	border-radius: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(10, 132, 255, 0.15);
+	box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+}
+
+.fileTitle {
+	font-size: 18px;
+	font-weight: 700;
+	margin-bottom: 4px;
+}
+
+.fileHint {
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.uploadBtn {
+	height: 48px;
+	padding: 0 20px;
+	border-radius: 12px;
+	font-weight: 700;
+	background: linear-gradient(
+		135deg,
+		rgba(10, 132, 255, 0.9),
+		rgba(90, 200, 250, 0.9)
+	);
+	color: white;
+	border: 1px solid rgba(255, 255, 255, 0.05);
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.uploadBtn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 20px rgba(10, 132, 255, 0.4);
+}
+
+.uploadDisabled {
+	height: 48px;
+	padding: 0 20px;
+	display: flex;
+	align-items: center;
+	border-radius: 12px;
+	font-weight: 700;
+	background: rgba(255, 255, 255, 0.1);
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.info {
+	margin-top: 32px;
+	padding: 20px;
+	background: rgba(255, 255, 255, 0.02);
+	border-radius: 12px;
+}
+
+.infoTitle {
+	font-size: 14px;
+	font-weight: 600;
+	margin-bottom: 12px;
+	color: var(--cyan);
+}
+
+.infoList {
+	display: grid;
+	gap: 8px;
+}
+
+.infoList p {
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.7);
+}
