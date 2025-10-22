@@ -33,10 +33,14 @@ export const rngService = {
 	},
 
 	async exportRun(id: string, minBits: number = 1000000): Promise<Blob> {
+		console.log(
+			`Запрос экспорта: /api/rng/runs/${id}/export?min_bits=${minBits}`,
+		)
 		const {data} = await apiClient.get(`/api/rng/runs/${id}/export`, {
 			params: {min_bits: minBits},
 			responseType: 'blob',
 		})
+		console.log('Ответ от API получен, размер:', data.size)
 		return data
 	},
 }

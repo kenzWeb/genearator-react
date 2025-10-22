@@ -16,7 +16,8 @@ export const DemoPage = () => {
 			>
 				<h2 className={s.title}>Демонстрация работы системы</h2>
 				<p className={s.subtitle}>
-					Пошаговая визуализация процесса генерации случайных чисел
+					Пошаговая визуализация принципов работы RandomTrust: от сбора энтропии
+					до статистической верификации результатов
 				</p>
 			</motion.div>
 
@@ -89,7 +90,7 @@ export const DemoPage = () => {
 						</div>
 						<h4 className={s.benefitTitle}>Криптографическая стойкость</h4>
 						<p className={s.benefitText}>
-							Использование множественных источников энтропии и SHA-256
+							Нестандартные источники энтропии + алгоритм ChaCha20
 						</p>
 					</div>
 					<div className={s.benefit}>
@@ -98,7 +99,7 @@ export const DemoPage = () => {
 						</div>
 						<h4 className={s.benefitTitle}>Проверяемость</h4>
 						<p className={s.benefitText}>
-							Каждый тираж может быть независимо верифицирован
+							Экспорт 1M+ битов для независимого аудита в NIST STS/Dieharder
 						</p>
 					</div>
 					<div className={s.benefit}>
@@ -107,7 +108,8 @@ export const DemoPage = () => {
 						</div>
 						<h4 className={s.benefitTitle}>Прозрачность</h4>
 						<p className={s.benefitText}>
-							Полная визуализация процесса генерации
+							Визуализация метрик энтропии и статистических тестов в реальном
+							времени
 						</p>
 					</div>
 				</div>

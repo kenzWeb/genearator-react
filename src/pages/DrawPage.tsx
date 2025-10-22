@@ -1,131 +1,26 @@
 import {motion} from 'framer-motion'
 import {useState} from 'react'
-import {
-	analysisService,
-	rngService,
-	type EntropyMetrics,
-	type TestOutcomeView,
-} from '../api'
 import {EntropyVisualizer} from '../components/EntropyVisualizer'
 import {TestResultsDisplay} from '../components/TestResultsDisplay'
+import {useDraw} from '../hooks/useDraw'
+import {mapEntropyMetricsToSources} from '../utils/entropyMappers'
+import {mapTestOutcomesToResults} from '../utils/testMappers'
 import s from './DrawPage.module.css'
-
-interface DrawSession {
-	runId: string
-	numbers: number[]
-	timestamp: string
-	entropyMetrics: EntropyMetrics
-	testResults?: TestOutcomeView[]
-	rawData?: string
-}
 
 export const DrawPage = () => {
 	const [numbersCount, setNumbersCount] = useState(6)
-	const [isGenerating, setIsGenerating] = useState(false)
-	const [currentSession, setCurrentSession] = useState<DrawSession | null>(null)
-	const [progress, setProgress] = useState(0)
-	const [stage, setStage] = useState<'idle' | 'generating' | 'analyzing'>(
-		'idle',
-	)
+	const {
+		isGenerating,
+		currentSession,
+		progress,
+		stage,
+		generateNumbers,
+		exportJSON,
+		exportBinary,
+	} = useDraw()
 
 	const onGenerateClick = async () => {
-		try {
-			setIsGenerating(true)
-			setStage('generating')
-			setProgress(10)
-
-			const bytesNeeded = numbersCount * 4
-			const response = await rngService.generate(
-				{
-					length: bytesNeeded,
-					parameters: {
-						duration_ms: 250,
-						noise_amplitude: 0.7,
-						spike_density: 0.05,
-					},
-				},
-				'hex',
-			)
-
-			setProgress(60)
-
-			const numbers = parseNumbersFromHex(response.data as string, numbersCount)
-
-			setProgress(80)
-			setStage('analyzing')
-
-			const analysisResult = await analysisService.analyzeRun(response.run_id, {
-				tests: ['frequency', 'runs', 'chi_square'],
-			})
-
-			setProgress(100)
-
-			setCurrentSession({
-				runId: response.run_id,
-				numbers,
-				timestamp: new Date().toISOString(),
-				entropyMetrics: response.entropy_metrics,
-				testResults: analysisResult.outcomes,
-				rawData: response.data as string,
-			})
-
-			setStage('idle')
-			setProgress(0)
-		} catch (error) {
-			console.error('Ошибка генерации:', error)
-			setStage('idle')
-			setProgress(0)
-		} finally {
-			setIsGenerating(false)
-		}
-	}
-
-	const parseNumbersFromHex = (hex: string, count: number): number[] => {
-		const numbers: number[] = []
-		for (let i = 0; i < count; i++) {
-			const chunk = hex.slice(i * 8, (i + 1) * 8)
-			const num = (parseInt(chunk, 16) % 50) + 1
-			numbers.push(num)
-		}
-		return numbers
-	}
-
-	const handleExport = () => {
-		if (!currentSession) return
-
-		const exportData = {
-			runId: currentSession.runId,
-			timestamp: currentSession.timestamp,
-			numbers: currentSession.numbers,
-			entropyMetrics: currentSession.entropyMetrics,
-			testResults: currentSession.testResults,
-		}
-
-		const blob = new Blob([JSON.stringify(exportData, null, 2)], {
-			type: 'application/json',
-		})
-		const url = URL.createObjectURL(blob)
-		const a = document.createElement('a')
-		a.href = url
-		a.download = `draw-${currentSession.runId}.json`
-		a.click()
-		URL.revokeObjectURL(url)
-	}
-
-	const handleExportBinary = async () => {
-		if (!currentSession) return
-
-		try {
-			const blob = await rngService.exportRun(currentSession.runId, 1000000)
-			const url = URL.createObjectURL(blob)
-			const a = document.createElement('a')
-			a.href = url
-			a.download = `sequence-${currentSession.runId}.txt`
-			a.click()
-			URL.revokeObjectURL(url)
-		} catch (error) {
-			console.error('Ошибка экспорта:', error)
-		}
+		await generateNumbers(numbersCount)
 	}
 
 	return (
@@ -137,8 +32,9 @@ export const DrawPage = () => {
 			>
 				<h2 className={s.title}>Проведение лотерейного тиража</h2>
 				<p className={s.subtitle}>
-					Генерация случайных чисел с использованием гибридного источника
-					энтропии и автоматической верификацией качества
+					Генерация криптографически стойких случайных чисел через RandomTrust
+					API с использованием нестандартных источников энтропии и
+					автоматической статистической верификацией
 				</p>
 			</motion.div>
 
@@ -215,13 +111,13 @@ export const DrawPage = () => {
 						{currentSession && (
 							<>
 								<button
-									onClick={handleExport}
+									onClick={exportJSON}
 									className={`${s.btn} ${s.success}`}
 								>
 									Экспорт JSON
 								</button>
 								<button
-									onClick={handleExportBinary}
+									onClick={exportBinary}
 									className={`${s.btn} ${s.outline}`}
 								>
 									Экспорт 1M битов
@@ -339,80 +235,13 @@ export const DrawPage = () => {
 					</motion.div>
 
 					<EntropyVisualizer
-						sources={[
-							{
-								name: 'Wire Hum',
-								type: 'physical' as const,
-								collected: currentSession.entropyMetrics.snr_db,
-								quality: Math.min(
-									100,
-									currentSession.entropyMetrics.snr_db * 2,
-								),
-							},
-							{
-								name: 'Lorenz Attractor',
-								type: 'algorithmic' as const,
-								collected:
-									currentSession.entropyMetrics.lyapunov_exponent * 100,
-								quality: Math.min(
-									100,
-									currentSession.entropyMetrics.lyapunov_exponent * 100,
-								),
-							},
-							{
-								name: 'Spectral Analysis',
-								type: 'hybrid' as const,
-								collected:
-									currentSession.entropyMetrics.spectral_deviation_percent,
-								quality:
-									100 -
-									currentSession.entropyMetrics.spectral_deviation_percent,
-							},
-						]}
+						sources={mapEntropyMetricsToSources(currentSession.entropyMetrics)}
 						isCollecting={false}
 					/>
 
 					{currentSession.testResults && (
 						<TestResultsDisplay
-							results={{
-								frequencyTest: {
-									name: 'Frequency Test',
-									result: currentSession.testResults[0]?.passed
-										? 'passed'
-										: 'failed',
-									pValue: currentSession.testResults[0]?.statistic || 0,
-									threshold: currentSession.testResults[0]?.threshold || 0,
-									description: 'Тест частотности',
-								},
-								runsTest: {
-									name: 'Runs Test',
-									result: currentSession.testResults[1]?.passed
-										? 'passed'
-										: 'failed',
-									pValue: currentSession.testResults[1]?.statistic || 0,
-									threshold: currentSession.testResults[1]?.threshold || 0,
-									description: 'Тест серий',
-								},
-								chiSquareTest: {
-									name: 'Chi-Square Test',
-									result: currentSession.testResults[2]?.passed
-										? 'passed'
-										: 'failed',
-									pValue: currentSession.testResults[2]?.statistic || 0,
-									threshold: currentSession.testResults[2]?.threshold || 0,
-									description: 'Тест хи-квадрат',
-								},
-								serialCorrelationTest: {
-									name: 'Serial Correlation',
-									result: 'pending',
-									pValue: 0,
-									threshold: 0,
-									description: 'Тест корреляции',
-								},
-								overall: currentSession.testResults.every((t) => t.passed)
-									? 'passed'
-									: 'failed',
-							}}
+							results={mapTestOutcomesToResults(currentSession.testResults)}
 						/>
 					)}
 				</>
