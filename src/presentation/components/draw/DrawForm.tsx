@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import s from './DrawForm.module.css'
 
 interface DrawFormProps {
@@ -15,7 +15,7 @@ export const DrawForm = ({
 	onGenerate,
 }: DrawFormProps) => {
 	return (
-		<motion.div
+		<m.div
 			initial={{opacity: 0}}
 			animate={{opacity: 1}}
 			transition={{delay: 0.2}}
@@ -91,6 +91,6 @@ export const DrawForm = ({
 					</button>
 				</div>
 			</div>
-		</motion.div>
+		</m.div>
 	)
 }

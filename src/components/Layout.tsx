@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import {NavLink, Outlet} from 'react-router-dom'
 import s from './Layout.module.css'
 
@@ -8,7 +8,7 @@ export const Layout = () => {
 			<nav className={s.header}>
 				<div className={s.container}>
 					<div className={s.bar}>
-						<motion.div
+						<m.div
 							initial={{opacity: 0, x: -20}}
 							animate={{opacity: 1, x: 0}}
 							className={s.brand}
@@ -33,7 +33,7 @@ export const Layout = () => {
 								<div className={s.title}>RandomTrust</div>
 								<div className={s.subtitle}>Transparent RNG System</div>
 							</div>
-						</motion.div>
+						</m.div>
 
 						<div className={s.nav}>
 							<NavLink

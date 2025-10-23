@@ -1,4 +1,4 @@
-import {AnimatePresence, motion} from 'framer-motion'
+import {AnimatePresence, m} from 'framer-motion'
 import {Check, Eye, Lock} from 'lucide-react'
 import {useDemoStepper} from '../features/demo/useDemoStepper'
 import s from './DemoPage.module.css'
@@ -9,7 +9,7 @@ export const DemoPage = () => {
 
 	return (
 		<div className={s.page}>
-			<motion.div
+			<m.div
 				initial={{opacity: 0, y: -20}}
 				animate={{opacity: 1, y: 0}}
 				className={s.center}
@@ -19,7 +19,7 @@ export const DemoPage = () => {
 					Пошаговая визуализация принципов работы RandomTrust: от сбора энтропии
 					до статистической верификации результатов
 				</p>
-			</motion.div>
+			</m.div>
 
 			<div className={s.card}>
 				<div className={s.controls}>
@@ -67,7 +67,7 @@ export const DemoPage = () => {
 				</div>
 
 				<AnimatePresence mode='wait'>
-					<motion.div
+					<m.div
 						key={currentStep}
 						initial={{opacity: 0, x: 20}}
 						animate={{opacity: 1, x: 0}}
@@ -77,7 +77,7 @@ export const DemoPage = () => {
 						<h3 className={s.stepTitle}>{steps[currentStep].title}</h3>
 						<p className={s.stepText}>{steps[currentStep].description}</p>
 						{steps[currentStep].component}
-					</motion.div>
+					</m.div>
 				</AnimatePresence>
 			</div>
 

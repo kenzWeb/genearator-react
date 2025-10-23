@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import {FileText, Play, Upload} from 'lucide-react'
 import {useEffect, useRef, useState} from 'react'
 import s from './FileUploader.module.css'
@@ -78,7 +78,7 @@ export const FileUploader = ({
 		const format = formatLabels[fileFormat]
 
 		return (
-			<motion.span
+			<m.span
 				className={s.formatBadge}
 				style={{borderColor: format.color, color: format.color}}
 				initial={{opacity: 0, scale: 0.8}}
@@ -86,19 +86,19 @@ export const FileUploader = ({
 				transition={{delay: 0.2}}
 			>
 				{format.text}
-			</motion.span>
+			</m.span>
 		)
 	}
 
 	return (
-		<motion.div
+		<m.div
 			initial={{opacity: 0, scale: 0.98}}
 			animate={{opacity: 1, scale: 1}}
 			transition={{delay: 0.2}}
 			className={s.card}
 		>
 			<div className={s.inner}>
-				<motion.div
+				<m.div
 					className={s.drop}
 					whileHover={!isAnalyzing ? {scale: 1.02} : {}}
 					transition={{type: 'spring', stiffness: 300}}
@@ -114,7 +114,7 @@ export const FileUploader = ({
 					/>
 
 					<div className={s.dropContent}>
-						<motion.div
+						<m.div
 							className={s.icon}
 							style={{color: 'var(--cyan)'}}
 							animate={{
@@ -127,7 +127,7 @@ export const FileUploader = ({
 							}}
 						>
 							{selectedFile ? <FileText size={48} /> : <Upload size={48} />}
-						</motion.div>
+						</m.div>
 
 						<div className={s.textContent}>
 							<div className={s.fileInfo}>
@@ -142,7 +142,7 @@ export const FileUploader = ({
 									: 'Поддерживаются текстовые файлы с последовательностью 0 и 1'}
 							</p>
 							{filePreview && (
-								<motion.div
+								<m.div
 									className={s.preview}
 									initial={{opacity: 0, height: 0}}
 									animate={{opacity: 1, height: 'auto'}}
@@ -150,12 +150,12 @@ export const FileUploader = ({
 								>
 									<p className={s.previewLabel}>Первые 200 символов:</p>
 									<code className={s.previewCode}>{filePreview}...</code>
-								</motion.div>
+								</m.div>
 							)}
 						</div>
 
 						<div className={s.actions}>
-							<motion.button
+							<m.button
 								className={s.selectBtn}
 								onClick={handleSelectClick}
 								disabled={isAnalyzing}
@@ -164,10 +164,10 @@ export const FileUploader = ({
 							>
 								<Upload size={18} />
 								Выбрать файл
-							</motion.button>
+							</m.button>
 
 							{selectedFile && (
-								<motion.button
+								<m.button
 									className={s.startBtn}
 									onClick={handleStartAnalysis}
 									disabled={isAnalyzing}
@@ -179,13 +179,13 @@ export const FileUploader = ({
 								>
 									<Play size={18} />
 									{isAnalyzing ? 'Анализ...' : 'Начать анализ'}
-								</motion.button>
+								</m.button>
 							)}
 						</div>
 					</div>
-				</motion.div>
+				</m.div>
 
-				<motion.div
+				<m.div
 					className={s.info}
 					initial={{opacity: 0, x: 20}}
 					animate={{opacity: 1, x: 0}}
@@ -193,37 +193,37 @@ export const FileUploader = ({
 				>
 					<h4 className={s.infoTitle}>Формат файла:</h4>
 					<div className={s.infoList}>
-						<motion.p
+						<m.p
 							initial={{opacity: 0, x: -10}}
 							animate={{opacity: 1, x: 0}}
 							transition={{delay: 0.5}}
 						>
 							• Текстовый файл (.txt)
-						</motion.p>
-						<motion.p
+						</m.p>
+						<m.p
 							initial={{opacity: 0, x: -10}}
 							animate={{opacity: 1, x: 0}}
 							transition={{delay: 0.6}}
 						>
 							• Binary: 01101001... или HEX: A3F2E8...
-						</motion.p>
-						<motion.p
+						</m.p>
+						<m.p
 							initial={{opacity: 0, x: -10}}
 							animate={{opacity: 1, x: 0}}
 							transition={{delay: 0.7}}
 						>
 							• Минимум 100 битов (25 HEX символов)
-						</motion.p>
-						<motion.p
+						</m.p>
+						<m.p
 							initial={{opacity: 0, x: -10}}
 							animate={{opacity: 1, x: 0}}
 							transition={{delay: 0.8}}
 						>
 							• Экспортированные файлы поддерживаются
-						</motion.p>
+						</m.p>
 					</div>
-				</motion.div>
+				</m.div>
 			</div>
-		</motion.div>
+		</m.div>
 	)
 }

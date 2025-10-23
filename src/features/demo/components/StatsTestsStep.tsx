@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import {Check, XCircle} from 'lucide-react'
 import styles from './styles/StatsTestsStep.module.css'
 
@@ -48,7 +48,7 @@ export const StatsTestsStep = () => (
 		</div>
 		<div className={styles.grid}>
 			{demoTests.map((test, idx) => (
-				<motion.div
+				<m.div
 					key={test.name}
 					initial={{opacity: 0, scale: 0.8}}
 					animate={{opacity: 1, scale: 1}}
@@ -69,14 +69,14 @@ export const StatsTestsStep = () => (
 						<span className={styles.value}>{test.pValue.toFixed(3)}</span>
 					</div>
 					<div className={styles.bar}>
-						<motion.div
+						<m.div
 							initial={{width: 0}}
 							animate={{width: `${test.pValue * 100}%`}}
 							transition={{delay: idx * 0.15 + 0.3, duration: 0.5}}
 							className={test.passed ? styles.fill : styles.fillError}
 						/>
 					</div>
-				</motion.div>
+				</m.div>
 			))}
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import {Activity, BarChart3, Sparkles} from 'lucide-react'
 import s from './AnalysisProgress.module.css'
 
@@ -10,13 +10,13 @@ export const AnalysisProgress = () => {
 	]
 
 	return (
-		<motion.div
+		<m.div
 			initial={{opacity: 0, y: 20}}
 			animate={{opacity: 1, y: 0}}
 			className={s.progressCard}
 		>
 			<div className={s.header}>
-				<motion.div
+				<m.div
 					className={s.spinner}
 					animate={{rotate: 360}}
 					transition={{duration: 2, repeat: Infinity, ease: 'linear'}}
@@ -28,14 +28,14 @@ export const AnalysisProgress = () => {
 
 			<div className={s.tests}>
 				{tests.map((test, idx) => (
-					<motion.div
+					<m.div
 						key={test.name}
 						className={s.testItem}
 						initial={{opacity: 0, x: -20}}
 						animate={{opacity: 1, x: 0}}
 						transition={{delay: test.delay}}
 					>
-						<motion.div
+						<m.div
 							className={s.testIcon}
 							animate={{
 								scale: [1, 1.2, 1],
@@ -48,9 +48,9 @@ export const AnalysisProgress = () => {
 							}}
 						>
 							{test.icon}
-						</motion.div>
+						</m.div>
 						<span className={s.testName}>{test.name}</span>
-						<motion.div
+						<m.div
 							className={s.testProgress}
 							initial={{width: 0}}
 							animate={{width: '100%'}}
@@ -61,9 +61,9 @@ export const AnalysisProgress = () => {
 								delay: idx * 0.2,
 							}}
 						/>
-					</motion.div>
+					</m.div>
 				))}
 			</div>
-		</motion.div>
+		</m.div>
 	)
 }

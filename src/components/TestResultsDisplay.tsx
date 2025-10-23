@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import {
 	Bar,
 	BarChart,
@@ -33,7 +33,7 @@ export const TestResultsDisplay = ({results}: Props) => {
 
 			<div className={s.grid}>
 				{tests.map((test, index) => (
-					<motion.div
+					<m.div
 						key={test.name}
 						initial={{opacity: 0, y: 20}}
 						animate={{opacity: 1, y: 0}}
@@ -66,7 +66,7 @@ export const TestResultsDisplay = ({results}: Props) => {
 								{test.threshold}
 							</span>
 						</div>
-					</motion.div>
+					</m.div>
 				))}
 			</div>
 

@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import {entropyTypeBadgeClass} from '../domain/selectors/entropy'
 import {iconForEntropyType} from '../domain/utils/icons'
 import type {EntropySource} from '../types'
@@ -33,7 +33,7 @@ export const EntropyVisualizer = ({sources, isCollecting}: Props) => {
 
 			<div className={s.list}>
 				{sources.map((source, index) => (
-					<motion.div
+					<m.div
 						key={source.name}
 						initial={{opacity: 0, x: -20}}
 						animate={{opacity: 1, x: 0}}
@@ -59,14 +59,14 @@ export const EntropyVisualizer = ({sources, isCollecting}: Props) => {
 						</div>
 
 						<div className={s.progress}>
-							<motion.div
+							<m.div
 								initial={{width: 0}}
 								animate={{width: `${source.quality * 100}%`}}
 								transition={{duration: 0.5, ease: 'easeOut'}}
 								className={s.bar}
 							>
 								<div className={s.shine} />
-							</motion.div>
+							</m.div>
 						</div>
 
 						<div className={s.foot}>
@@ -75,7 +75,7 @@ export const EntropyVisualizer = ({sources, isCollecting}: Props) => {
 								{(source.quality * 100).toFixed(0)}%
 							</span>
 						</div>
-					</motion.div>
+					</m.div>
 				))}
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import type {EntropyMetrics} from '../../../core/domain/models'
 import {EntropyMetricsDisplay} from '../draw'
 import {LorenzAttractor} from '../visualizations'
@@ -14,7 +14,7 @@ export const EntropyVisualization = ({
 	testsPassed,
 }: EntropyVisualizationProps) => {
 	return (
-		<motion.div
+		<m.div
 			initial={{opacity: 0, y: 20}}
 			animate={{opacity: 1, y: 0}}
 			transition={{delay: 0.1}}
@@ -55,6 +55,6 @@ export const EntropyVisualization = ({
 			</div>
 
 			<EntropyMetricsDisplay metrics={metrics} testsPassed={testsPassed} />
-		</motion.div>
+		</m.div>
 	)
 }

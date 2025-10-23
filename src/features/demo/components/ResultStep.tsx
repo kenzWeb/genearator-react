@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import {Download, FileJson, Sparkles} from 'lucide-react'
 import styles from './styles/ResultStep.module.css'
 
@@ -69,7 +69,7 @@ const downloadBinary = () => {
 
 export const ResultStep = () => (
 	<div className={styles.card}>
-		<motion.div
+		<m.div
 			initial={{opacity: 0, y: -20}}
 			animate={{opacity: 1, y: 0}}
 			transition={{duration: 0.6}}
@@ -77,11 +77,11 @@ export const ResultStep = () => (
 		>
 			<Sparkles className={styles.titleIcon} size={24} />
 			<h3 className={styles.title}>Результат генерации (6 чисел)</h3>
-		</motion.div>
+		</m.div>
 
 		<div className={styles.numbers}>
 			{[42, 17, 89, 33, 56, 91].map((num, idx) => (
-				<motion.div
+				<m.div
 					key={idx}
 					initial={{opacity: 0, scale: 0, rotateY: 180}}
 					animate={{opacity: 1, scale: 1, rotateY: 0}}
@@ -99,7 +99,7 @@ export const ResultStep = () => (
 					className={styles.num}
 				>
 					{num}
-				</motion.div>
+				</m.div>
 			))}
 		</div>
 
@@ -112,7 +112,7 @@ export const ResultStep = () => (
 				{label: 'Spectral Dev:', value: '2.45%'},
 				{label: 'Тесты:', value: '✓ Все пройдены', success: true},
 			].map((metric, idx) => (
-				<motion.div
+				<m.div
 					key={metric.label}
 					initial={{opacity: 0, x: -20}}
 					animate={{opacity: 1, x: 0}}
@@ -128,11 +128,11 @@ export const ResultStep = () => (
 					>
 						{metric.value}
 					</span>
-				</motion.div>
+				</m.div>
 			))}
 		</div>
 
-		<motion.div
+		<m.div
 			initial={{opacity: 0, y: 20}}
 			animate={{opacity: 1, y: 0}}
 			transition={{delay: 1.5}}
@@ -140,7 +140,7 @@ export const ResultStep = () => (
 		>
 			<h4 className={styles.exportTitle}>Возможности экспорта:</h4>
 			<div className={styles.exportButtons}>
-				<motion.button
+				<m.button
 					whileHover={{scale: 1.05, y: -5}}
 					whileTap={{scale: 0.95}}
 					className={styles.exportBtn}
@@ -154,8 +154,8 @@ export const ResultStep = () => (
 							Числа, метрики, результаты тестов
 						</div>
 					</div>
-				</motion.button>
-				<motion.button
+				</m.button>
+				<m.button
 					whileHover={{scale: 1.05, y: -5}}
 					whileTap={{scale: 0.95}}
 					className={styles.exportBtn}
@@ -169,11 +169,11 @@ export const ResultStep = () => (
 							Для проверки в NIST STS/Dieharder
 						</div>
 					</div>
-				</motion.button>
+				</m.button>
 			</div>
-		</motion.div>
+		</m.div>
 
-		<motion.div
+		<m.div
 			initial={{opacity: 0}}
 			animate={{opacity: 1}}
 			transition={{delay: 1.8}}
@@ -181,6 +181,6 @@ export const ResultStep = () => (
 		>
 			<strong>API Endpoint:</strong> GET /api/rng/runs/{'<run_id>'}
 			/export?min_bits=1000000
-		</motion.div>
+		</m.div>
 	</div>
 )

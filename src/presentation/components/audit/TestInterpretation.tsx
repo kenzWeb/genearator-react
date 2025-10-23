@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import {AlertCircle, BarChart3, Shuffle, TrendingUp} from 'lucide-react'
 import s from './TestInterpretation.module.css'
 
@@ -36,16 +36,16 @@ export const TestInterpretation = () => {
 
 	return (
 		<div className={s.resultCard}>
-			<motion.h3
+			<m.h3
 				className={s.resultTitle}
 				initial={{opacity: 0, y: -10}}
 				animate={{opacity: 1, y: 0}}
 			>
 				Интерпретация результатов
-			</motion.h3>
+			</m.h3>
 			<div className={s.explain}>
 				{interpretations.map((item) => (
-					<motion.div
+					<m.div
 						key={item.title}
 						className={s.explanationItem}
 						initial={{opacity: 0, x: -20}}
@@ -53,17 +53,17 @@ export const TestInterpretation = () => {
 						transition={{delay: item.delay}}
 						whileHover={{x: 10, transition: {duration: 0.2}}}
 					>
-						<motion.div
+						<m.div
 							className={s.iconWrapper}
 							whileHover={{rotate: 360, transition: {duration: 0.6}}}
 						>
 							{item.icon}
-						</motion.div>
+						</m.div>
 						<div className={s.textContent}>
 							<strong className={s.accent}>{item.title}:</strong>{' '}
 							{item.description}
 						</div>
-					</motion.div>
+					</m.div>
 				))}
 			</div>
 		</div>

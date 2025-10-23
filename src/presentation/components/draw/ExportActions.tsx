@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import s from './ExportActions.module.css'
 
 interface ExportActionsProps {
@@ -11,7 +11,7 @@ export const ExportActions = ({
 	onExportBinary,
 }: ExportActionsProps) => {
 	return (
-		<motion.div
+		<m.div
 			initial={{opacity: 0, y: 10}}
 			animate={{opacity: 1, y: 0}}
 			className={s.actions}
@@ -22,6 +22,6 @@ export const ExportActions = ({
 			<button onClick={onExportBinary} className={`${s.btn} ${s.outline}`}>
 				Экспорт 1M битов
 			</button>
-		</motion.div>
+		</m.div>
 	)
 }

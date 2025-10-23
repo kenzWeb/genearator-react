@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import {Eye} from 'lucide-react'
 import {useNavigate} from 'react-router-dom'
 import s from './DrawResults.module.css'
@@ -16,7 +16,7 @@ export const DrawResults = ({numbers, runId, timestamp}: DrawResultsProps) => {
 	const navigate = useNavigate()
 
 	return (
-		<motion.div
+		<m.div
 			initial={{opacity: 0, scale: 0.98}}
 			animate={{opacity: 1, scale: 1}}
 			className={s.resultCard}
@@ -33,7 +33,7 @@ export const DrawResults = ({numbers, runId, timestamp}: DrawResultsProps) => {
 			</div>
 			<div className={s.kpiWrap}>
 				{displayNumbers.map((num, idx) => (
-					<motion.div
+					<m.div
 						key={idx}
 						initial={{opacity: 0, scale: 0.8}}
 						animate={{opacity: 1, scale: 1}}
@@ -41,7 +41,7 @@ export const DrawResults = ({numbers, runId, timestamp}: DrawResultsProps) => {
 						className={s.kpi}
 					>
 						{num}
-					</motion.div>
+					</m.div>
 				))}
 			</div>
 
@@ -73,6 +73,6 @@ export const DrawResults = ({numbers, runId, timestamp}: DrawResultsProps) => {
 					</div>
 				</div>
 			</div>
-		</motion.div>
+		</m.div>
 	)
 }

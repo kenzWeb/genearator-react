@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import {Calendar, Clock, Download, Hash} from 'lucide-react'
 import s from './RunInfoCard.module.css'
 
@@ -16,7 +16,7 @@ export const RunInfoCard = ({
 	onExport,
 }: RunInfoCardProps) => {
 	return (
-		<motion.div
+		<m.div
 			initial={{opacity: 0, scale: 0.98}}
 			animate={{opacity: 1, scale: 1}}
 			className={s.card}
@@ -62,6 +62,6 @@ export const RunInfoCard = ({
 				<Download size={18} />
 				Скачать полные данные (1M+ бит)
 			</button>
-		</motion.div>
+		</m.div>
 	)
 }

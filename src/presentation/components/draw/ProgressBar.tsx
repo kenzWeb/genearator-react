@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import s from './ProgressBar.module.css'
 
 interface ProgressBarProps {
@@ -16,7 +16,7 @@ export const ProgressBar = ({stage, progress}: ProgressBarProps) => {
 				<span style={{color: 'var(--cyan)', fontWeight: 600}}>{progress}%</span>
 			</div>
 			<div className={s.progress}>
-				<motion.div
+				<m.div
 					initial={{width: 0}}
 					animate={{width: `${progress}%`}}
 					className={s.bar}

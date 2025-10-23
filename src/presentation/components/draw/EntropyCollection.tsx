@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import {Activity, Waves, Zap} from 'lucide-react'
 import type {EntropyMetrics, EntropySource} from '../../../core/domain/models'
 import {LorenzAttractor} from '../visualizations/LorenzAttractor'
@@ -42,7 +42,7 @@ export const EntropyCollection = ({
 	}
 
 	return (
-		<motion.div
+		<m.div
 			initial={{opacity: 0, y: 20}}
 			animate={{opacity: 1, y: 0}}
 			className={s.container}
@@ -76,7 +76,7 @@ export const EntropyCollection = ({
 
 			<div className={s.sources}>
 				{sources.map((source, idx) => (
-					<motion.div
+					<m.div
 						key={source.name}
 						initial={{opacity: 0, x: -20}}
 						animate={{opacity: 1, x: 0}}
@@ -97,7 +97,7 @@ export const EntropyCollection = ({
 						</div>
 
 						<div className={s.progress}>
-							<motion.div
+							<m.div
 								className={s.progressBar}
 								initial={{width: 0}}
 								animate={{width: `${source.collected}%`}}
@@ -126,9 +126,9 @@ export const EntropyCollection = ({
 								Качество {Math.round(source.quality * 100)}%
 							</span>
 						</div>
-					</motion.div>
+					</m.div>
 				))}
 			</div>
-		</motion.div>
+		</m.div>
 	)
 }

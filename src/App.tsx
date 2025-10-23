@@ -16,7 +16,6 @@ const RunDetailPage = lazy(() =>
 	import('./pages/RunDetailPage').then((m) => ({default: m.RunDetailPage})),
 )
 
-// Lazy load framer-motion features (только после рендера)
 const loadFeatures = () =>
 	import('./lib/motion-features').then((res) => res.default)
 
