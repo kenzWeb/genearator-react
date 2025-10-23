@@ -10,12 +10,8 @@ RUN npm install --no-audit --no-fund
 
 COPY . .
 
-
-ARG VITE_API_URL=http://localhost:8000
-ARG VITE_API_BASE_URL=http://localhost:8000
-ENV VITE_API_URL=${VITE_API_URL}
-ENV VITE_API_BASE_URL=${VITE_API_BASE_URL}
-
+# Vite возьмёт значения из .env/.env.production автоматически при сборке.
+# Не выставляем ENV/ARG, чтобы не переопределять значения из .env
 RUN npm run build
 
 FROM node:20-alpine AS runner
