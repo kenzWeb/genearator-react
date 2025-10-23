@@ -1,5 +1,6 @@
 import {LazyMotion} from 'framer-motion'
 import {Suspense, lazy} from 'react'
+import {Toaster} from 'react-hot-toast'
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 import {Layout} from './components/Layout'
 
@@ -23,6 +24,23 @@ function App() {
 	return (
 		<LazyMotion features={loadFeatures} strict>
 			<BrowserRouter>
+				<Toaster
+					position='top-right'
+					toastOptions={{
+						duration: 4000,
+						style: {
+							background: 'var(--card-bg)',
+							color: 'var(--text)',
+							border: '1px solid var(--border)',
+						},
+						success: {
+							iconTheme: {
+								primary: 'var(--success)',
+								secondary: 'var(--card-bg)',
+							},
+						},
+					}}
+				/>
 				<Routes>
 					<Route path='/' element={<Layout />}>
 						<Route index element={<Navigate to='/draw' replace />} />

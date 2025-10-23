@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import toast from 'react-hot-toast'
 import {useAuditAnalysis} from '../../application/use-cases/audit.use-case'
 import type {TestResults} from '../../core/domain/models'
 
@@ -28,6 +29,10 @@ export const useAudit = (): UseAuditReturn => {
 			const session = await analyzeFile(file)
 
 			setTestResults(session.testResults || null)
+
+			toast.success('Анализ завершен! Результаты готовы.', {
+				duration: 5000,
+			})
 		} catch (err) {
 			console.error('Ошибка анализа:', err)
 			setTestResults(null)
