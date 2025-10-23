@@ -1,4 +1,4 @@
-import {motion} from 'framer-motion'
+import {m} from 'framer-motion'
 import {AlertCircle} from 'lucide-react'
 import {TestResultsDisplay} from '../components/TestResultsDisplay'
 import {
@@ -14,7 +14,7 @@ export const AuditPage = () => {
 
 	return (
 		<div className={s.page}>
-			<motion.div
+			<m.div
 				initial={{opacity: 0, y: -20}}
 				animate={{opacity: 1, y: 0}}
 				className={s.center}
@@ -25,12 +25,10 @@ export const AuditPage = () => {
 					соответствие критериям случайности через статистические тесты
 					RandomTrust API
 				</p>
-			</motion.div>
-
+			</m.div>
 			<FileUploader isAnalyzing={isAnalyzing} onFileSelect={handleFileUpload} />
-
 			{error && !isAnalyzing && (
-				<motion.div
+				<m.div
 					className={s.errorCard}
 					initial={{opacity: 0, scale: 0.95}}
 					animate={{opacity: 1, scale: 1}}
@@ -41,28 +39,46 @@ export const AuditPage = () => {
 						<h4 className={s.errorTitle}>Ошибка анализа</h4>
 						<p className={s.errorMessage}>{error}</p>
 					</div>
-				</motion.div>
+				</m.div>
 			)}
-
 			{isAnalyzing && <AnalysisProgress />}
-
 			{testResults && !isAnalyzing && (
 				<>
-					<motion.div
+					<m.div
 						initial={{opacity: 0, y: 20}}
 						animate={{opacity: 1, y: 0}}
 						transition={{delay: 0.2}}
 					>
 						<TestResultsDisplay results={testResults} />
-					</motion.div>
+					</m.div>
 
-					<motion.div
+					<m.div
 						initial={{opacity: 0, y: 20}}
 						animate={{opacity: 1, y: 0}}
 						transition={{delay: 0.4}}
 					>
 						<TestInterpretation />
-					</motion.div>
+					</m.div>
+				</>
+			)}{' '}
+			{isAnalyzing && <AnalysisProgress />}
+			{testResults && !isAnalyzing && (
+				<>
+					<m.div
+						initial={{opacity: 0, y: 20}}
+						animate={{opacity: 1, y: 0}}
+						transition={{delay: 0.2}}
+					>
+						<TestResultsDisplay results={testResults} />
+					</m.div>
+
+					<m.div
+						initial={{opacity: 0, y: 20}}
+						animate={{opacity: 1, y: 0}}
+						transition={{delay: 0.4}}
+					>
+						<TestInterpretation />
+					</m.div>
 				</>
 			)}
 		</div>
