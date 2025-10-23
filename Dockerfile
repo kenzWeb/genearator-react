@@ -10,8 +10,7 @@ RUN npm install --no-audit --no-fund
 
 COPY . .
 
-# Vite возьмёт значения из .env/.env.production автоматически при сборке.
-# Не выставляем ENV/ARG, чтобы не переопределять значения из .env
+
 RUN npm run build
 
 FROM node:20-alpine AS runner
