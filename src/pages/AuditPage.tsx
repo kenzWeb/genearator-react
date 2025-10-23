@@ -27,6 +27,7 @@ export const AuditPage = () => {
 				</p>
 			</m.div>
 			<FileUploader isAnalyzing={isAnalyzing} onFileSelect={handleFileUpload} />
+
 			{error && !isAnalyzing && (
 				<m.div
 					className={s.errorCard}
@@ -41,27 +42,9 @@ export const AuditPage = () => {
 					</div>
 				</m.div>
 			)}
-			{isAnalyzing && <AnalysisProgress />}
-			{testResults && !isAnalyzing && (
-				<>
-					<m.div
-						initial={{opacity: 0, y: 20}}
-						animate={{opacity: 1, y: 0}}
-						transition={{delay: 0.2}}
-					>
-						<TestResultsDisplay results={testResults} />
-					</m.div>
 
-					<m.div
-						initial={{opacity: 0, y: 20}}
-						animate={{opacity: 1, y: 0}}
-						transition={{delay: 0.4}}
-					>
-						<TestInterpretation />
-					</m.div>
-				</>
-			)}{' '}
 			{isAnalyzing && <AnalysisProgress />}
+
 			{testResults && !isAnalyzing && (
 				<>
 					<m.div

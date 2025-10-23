@@ -1,0 +1,25 @@
+.textContent {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.fileInfo {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.fileTitle {
+	font-size: 18px;
+	font-weight: 700;
+	color: rgba(255, 255, 255, 0.95);
+	margin: 0;
+}
+
+.fileHint {
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.6);
+	margin: 0;
+}

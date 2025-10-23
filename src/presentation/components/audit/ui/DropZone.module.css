@@ -1,0 +1,26 @@
+.drop {
+	border: 2px dashed rgba(10, 132, 255, 0.4);
+	border-radius: 16px;
+	padding: 48px 32px;
+	text-align: center;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(40px);
+}
+
+.drop:hover {
+	border-color: rgba(10, 132, 255, 0.7);
+	background: rgba(255, 255, 255, 0.03);
+	box-shadow: 0 8px 24px rgba(10, 132, 255, 0.15);
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+}
+
+.hidden {
+	display: none;
+}

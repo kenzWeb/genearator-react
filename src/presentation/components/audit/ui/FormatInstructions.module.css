@@ -1,0 +1,23 @@
+.info {
+	margin-top: 32px;
+	padding: 20px;
+	background: rgba(255, 255, 255, 0.02);
+	border-radius: 12px;
+}
+
+.title {
+	font-size: 14px;
+	font-weight: 600;
+	margin-bottom: 12px;
+	color: var(--cyan);
+}
+
+.list {
+	display: grid;
+	gap: 8px;
+}
+
+.list p {
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.7);
+}
