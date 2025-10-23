@@ -1,30 +1,72 @@
 .progressCard {
 	background: rgba(255, 255, 255, 0.03);
-	border: 1px solid rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(0, 255, 255, 0.2);
 	border-radius: 16px;
 	padding: 32px;
+	box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
+}
+
+.header {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	gap: 16px;
+	margin-bottom: 24px;
 }
 
 .spinner {
-	width: 24px;
-	height: 24px;
-	border: 3px solid rgba(255, 255, 255, 0.1);
+	width: 32px;
+	height: 32px;
+	border: 3px solid rgba(0, 255, 255, 0.2);
 	border-top-color: var(--cyan);
 	border-radius: 50%;
-	animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-	to {
-		transform: rotate(360deg);
-	}
 }
 
 .progressText {
+	font-size: 16px;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.tests {
+	display: grid;
+	gap: 16px;
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+.testItem {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 16px;
+	background: rgba(0, 255, 255, 0.05);
+	border: 1px solid rgba(0, 255, 255, 0.1);
+	border-radius: 12px;
+	position: relative;
+	overflow: hidden;
+}
+
+.testIcon {
+	color: var(--cyan);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.testName {
 	font-size: 14px;
+	font-weight: 500;
 	color: rgba(255, 255, 255, 0.8);
+	flex: 1;
+}
+
+.testProgress {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 3px;
+	background: linear-gradient(90deg, var(--cyan), var(--mint));
+	border-radius: 0 0 12px 12px;
 }

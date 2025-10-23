@@ -20,7 +20,12 @@
 	}
 }
 
-/* Audio Recording Section */
+.lorenzSection {
+	margin-bottom: 24px;
+	border-radius: 12px;
+	overflow: hidden;
+}
+
 .audioSection {
 	background: linear-gradient(
 		135deg,

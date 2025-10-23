@@ -1,4 +1,5 @@
 import {motion} from 'framer-motion'
+import {AlertCircle} from 'lucide-react'
 import {TestResultsDisplay} from '../components/TestResultsDisplay'
 import {
 	AnalysisProgress,
@@ -9,7 +10,7 @@ import {useAudit} from '../presentation/hooks'
 import s from './AuditPage.module.css'
 
 export const AuditPage = () => {
-	const {isAnalyzing, fileName, testResults, handleFileUpload} = useAudit()
+	const {isAnalyzing, testResults, error, handleFileUpload} = useAudit()
 
 	return (
 		<div className={s.page}>
@@ -26,11 +27,22 @@ export const AuditPage = () => {
 				</p>
 			</motion.div>
 
-			<FileUploader
-				fileName={fileName}
-				isAnalyzing={isAnalyzing}
-				onFileSelect={handleFileUpload}
-			/>
+			<FileUploader isAnalyzing={isAnalyzing} onFileSelect={handleFileUpload} />
+
+			{error && !isAnalyzing && (
+				<motion.div
+					className={s.errorCard}
+					initial={{opacity: 0, scale: 0.95}}
+					animate={{opacity: 1, scale: 1}}
+					transition={{type: 'spring', stiffness: 300}}
+				>
+					<AlertCircle size={24} />
+					<div>
+						<h4 className={s.errorTitle}>Ошибка анализа</h4>
+						<p className={s.errorMessage}>{error}</p>
+					</div>
+				</motion.div>
+			)}
 
 			{isAnalyzing && <AnalysisProgress />}
 
@@ -39,11 +51,18 @@ export const AuditPage = () => {
 					<motion.div
 						initial={{opacity: 0, y: 20}}
 						animate={{opacity: 1, y: 0}}
+						transition={{delay: 0.2}}
 					>
 						<TestResultsDisplay results={testResults} />
 					</motion.div>
 
-					<TestInterpretation />
+					<motion.div
+						initial={{opacity: 0, y: 20}}
+						animate={{opacity: 1, y: 0}}
+						transition={{delay: 0.4}}
+					>
+						<TestInterpretation />
+					</motion.div>
 				</>
 			)}
 		</div>

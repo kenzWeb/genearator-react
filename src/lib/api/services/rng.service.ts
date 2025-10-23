@@ -14,7 +14,7 @@ export interface RNGRunSummary {
 }
 
 export interface RNGRunDetail extends RNGRunSummary {
-	data: string
+	data?: string
 	entropy_metrics?: {
 		snr: number
 		lyapunov: number

@@ -1,0 +1,80 @@
+.card {
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid rgba(0, 255, 255, 0.1);
+	border-radius: 16px;
+	padding: 24px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.infoGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 16px;
+	margin-bottom: 24px;
+}
+
+.infoItem {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 16px;
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.05);
+	border-radius: 12px;
+}
+
+.icon {
+	color: var(--cyan);
+	flex-shrink: 0;
+}
+
+.label {
+	font-size: 12px;
+	color: var(--muted);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	margin-bottom: 4px;
+}
+
+.value {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--text);
+	font-family: 'Courier New', monospace;
+}
+
+.exportBtn {
+	width: 100%;
+	padding: 14px 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	background: linear-gradient(
+		135deg,
+		rgba(0, 255, 255, 0.15),
+		rgba(0, 255, 170, 0.15)
+	);
+	border: 1px solid rgba(0, 255, 255, 0.3);
+	border-radius: 12px;
+	color: var(--cyan);
+	font-size: 15px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.exportBtn:hover {
+	background: linear-gradient(
+		135deg,
+		rgba(0, 255, 255, 0.25),
+		rgba(0, 255, 170, 0.25)
+	);
+	border-color: rgba(0, 255, 255, 0.5);
+	box-shadow: 0 6px 20px rgba(0, 255, 255, 0.2);
+	transform: translateY(-2px);
+}
+
+.exportBtn:active {
+	transform: translateY(0);
+}

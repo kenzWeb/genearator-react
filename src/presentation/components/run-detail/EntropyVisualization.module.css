@@ -1,0 +1,47 @@
+.card {
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid rgba(0, 255, 255, 0.1);
+	border-radius: 16px;
+	padding: 24px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.title {
+	font-size: 22px;
+	font-weight: 700;
+	color: var(--cyan);
+	margin-bottom: 16px;
+}
+
+.description {
+	background: rgba(0, 255, 255, 0.05);
+	border: 1px solid rgba(0, 255, 255, 0.15);
+	border-radius: 12px;
+	padding: 20px;
+	margin-bottom: 24px;
+}
+
+.descText {
+	color: var(--text);
+	font-size: 14px;
+	line-height: 1.6;
+	margin-bottom: 12px;
+}
+
+.descText:last-child {
+	margin-bottom: 0;
+}
+
+.highlight {
+	color: var(--cyan);
+	font-weight: 600;
+}
+
+.lorenzContainer {
+	height: 400px;
+	margin-bottom: 24px;
+	border-radius: 12px;
+	overflow: hidden;
+	background: rgba(0, 0, 0, 0.3);
+	border: 1px solid rgba(0, 255, 255, 0.1);
+}

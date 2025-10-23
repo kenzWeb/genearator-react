@@ -1,5 +1,6 @@
 export {DrawForm} from './DrawForm'
 export {DrawResults} from './DrawResults'
+export {EntropyCollection} from './EntropyCollection'
 export {EntropyMetricsDisplay} from './EntropyMetricsDisplay'
 export {ExportActions} from './ExportActions'
 export {ProgressBar} from './ProgressBar'

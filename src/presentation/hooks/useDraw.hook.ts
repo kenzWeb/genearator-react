@@ -43,14 +43,23 @@ export const useDraw = (): UseDrawReturn => {
 			setStage('generating')
 			setProgress(10)
 
+			await new Promise((resolve) => setTimeout(resolve, 2500))
+			setProgress(30)
+
 			const session = await generate(count)
 
 			setProgress(60)
+
+			await new Promise((resolve) => setTimeout(resolve, 800))
 			setStage('analyzing')
 			setProgress(80)
 
+			await new Promise((resolve) => setTimeout(resolve, 1200))
+
 			setCurrentSession(session)
 			setProgress(100)
+
+			await new Promise((resolve) => setTimeout(resolve, 500))
 			setStage('idle')
 			setProgress(0)
 		} catch (error) {

@@ -11,6 +11,9 @@ const AuditPage = lazy(() =>
 const DemoPage = lazy(() =>
 	import('./pages/DemoPage').then((m) => ({default: m.DemoPage})),
 )
+const RunDetailPage = lazy(() =>
+	import('./pages/RunDetailPage').then((m) => ({default: m.RunDetailPage})),
+)
 
 function App() {
 	return (
@@ -39,6 +42,14 @@ function App() {
 						element={
 							<Suspense fallback={null}>
 								<DemoPage />
+							</Suspense>
+						}
+					/>
+					<Route
+						path='run/:runId'
+						element={
+							<Suspense fallback={null}>
+								<RunDetailPage />
 							</Suspense>
 						}
 					/>

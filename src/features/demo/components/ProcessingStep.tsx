@@ -1,10 +1,19 @@
 import {Cog, Lock, Mic, Radio, Sparkles, Zap} from 'lucide-react'
 import base from '../../../pages/DemoPage.module.css'
+import {LorenzAttractor} from '../../../presentation/components/visualizations'
 import cs from './styles/ProcessingStep.module.css'
 
 export const ProcessingStep = () => (
 	<div className={cs.card}>
-		{/* Audio Recording Visualization */}
+		<div className={cs.lorenzSection}>
+			<LorenzAttractor
+				isActive={true}
+				lyapunov={2.8}
+				snr={32}
+				spectralDeviation={45}
+			/>
+		</div>
+
 		<div className={cs.audioSection}>
 			<div className={cs.audioHeader}>
 				<div className={cs.recordingIndicator}>

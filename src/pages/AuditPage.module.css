@@ -199,3 +199,35 @@
 	color: var(--cyan);
 	font-weight: 700;
 }
+
+.errorCard {
+	background: rgba(255, 68, 68, 0.1);
+	border: 1px solid rgba(255, 68, 68, 0.3);
+	border-radius: 16px;
+	padding: 24px;
+	display: flex;
+	align-items: flex-start;
+	gap: 16px;
+	box-shadow: 0 8px 24px rgba(255, 68, 68, 0.2);
+	backdrop-filter: blur(20px);
+}
+
+.errorCard > svg {
+	color: #ff4444;
+	flex-shrink: 0;
+	margin-top: 2px;
+}
+
+.errorTitle {
+	font-size: 16px;
+	font-weight: 700;
+	color: #ff4444;
+	margin: 0 0 8px 0;
+}
+
+.errorMessage {
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.8);
+	margin: 0;
+	line-height: 1.5;
+}

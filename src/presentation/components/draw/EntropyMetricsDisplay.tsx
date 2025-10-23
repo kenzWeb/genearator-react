@@ -2,7 +2,7 @@ import type {EntropyMetrics} from '../../../core/domain/models'
 import s from './EntropyMetricsDisplay.module.css'
 
 interface EntropyMetricsDisplayProps {
-	metrics: EntropyMetrics
+	metrics?: EntropyMetrics
 	testsPassed: boolean
 }
 
@@ -14,16 +14,18 @@ export const EntropyMetricsDisplay = ({
 		<div className={s.metaGrid}>
 			<div>
 				<div className={s.metaLabel}>SNR (dB):</div>
-				<div className={s.mono}>{metrics.snr_db.toFixed(2)}</div>
+				<div className={s.mono}>{metrics?.snr_db?.toFixed(2) ?? 'N/A'}</div>
 			</div>
 			<div>
 				<div className={s.metaLabel}>Lyapunov:</div>
-				<div className={s.mono}>{metrics.lyapunov_exponent.toFixed(4)}</div>
+				<div className={s.mono}>
+					{metrics?.lyapunov_exponent?.toFixed(4) ?? 'N/A'}
+				</div>
 			</div>
 			<div>
 				<div className={s.metaLabel}>Spectral Deviation:</div>
 				<div className={s.mono}>
-					{metrics.spectral_deviation_percent.toFixed(2)}%
+					{metrics?.spectral_deviation_percent?.toFixed(2) ?? 'N/A'}%
 				</div>
 			</div>
 			<div>

@@ -29,7 +29,6 @@ export function useDrawGeneration() {
 		const response = await rngService.generate(
 			{
 				length: bytesNeeded,
-				noise_seed: COMPETITION_REQUIREMENTS.USE_RANDOM_SEED ? null : undefined,
 				parameters: {
 					duration_ms: 250,
 					noise_amplitude: 0.7,
@@ -39,7 +38,7 @@ export function useDrawGeneration() {
 			'hex',
 		)
 
-		const numbers = parseNumbersFromHex(response.data as string, count)
+		const numbers = await parseNumbersFromHex(response.data as string, count)
 
 		const analysisResult = await analysisService.analyzeRun(response.run_id, {
 			tests: ['frequency', 'runs', 'chi_square'],

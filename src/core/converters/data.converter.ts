@@ -1,17 +1,29 @@
 import {RNG_CONSTANTS} from '../../config/constants'
 
-export function parseNumbersFromHex(
+export async function parseNumbersFromHex(
 	hex: string,
 	count: number,
 	max: number = 50,
-): number[] {
-	const numbers: number[] = []
+): Promise<number[]> {
 	const chunkLength = RNG_CONSTANTS.HEX_CHUNK_LENGTH
+	const totalChunks = Math.min(count, Math.floor(hex.length / chunkLength))
 
-	for (let i = 0; i < count && i * chunkLength < hex.length; i++) {
-		const chunk = hex.slice(i * chunkLength, (i + 1) * chunkLength)
-		const num = parseInt(chunk, 16)
-		numbers.push((num % max) + 1)
+	const numbers = new Array(totalChunks)
+	const CHUNK_SIZE = 5000
+
+	for (let batch = 0; batch < totalChunks; batch += CHUNK_SIZE) {
+		const end = Math.min(batch + CHUNK_SIZE, totalChunks)
+
+		if (batch > 0) {
+			await new Promise((resolve) => setTimeout(resolve, 0))
+		}
+
+		for (let i = batch; i < end; i++) {
+			const startIdx = i * chunkLength
+			const chunk = hex.slice(startIdx, startIdx + chunkLength)
+			const num = parseInt(chunk, 16)
+			numbers[i] = (num % max) + 1
+		}
 	}
 
 	return numbers

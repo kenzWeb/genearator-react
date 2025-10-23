@@ -31,7 +31,7 @@ export const useDemoStepper = () => {
 				}
 				return prev + 1
 			})
-		}, 3000)
+		}, 5000)
 	}, [isPlaying])
 
 	useEffect(
