@@ -19,41 +19,41 @@ export const auditService = {
 		console.log(`  - Cleaned length: ${cleanedSequence.length} chars`)
 		console.log(`  - First 100 chars: ${cleanedSequence.slice(0, 100)}`)
 
-		let binarySequence: string
+		let hexData: string
 		let detectedFormat = 'unknown'
 
 		if (/^[01]+$/.test(cleanedSequence)) {
 			detectedFormat = 'binary'
-			binarySequence = cleanedSequence
-			console.log(`  ✅ Detected BINARY format (using as-is)`)
+			hexData = ''
+			for (let i = 0; i < cleanedSequence.length; i += 4) {
+				const chunk = cleanedSequence.slice(i, i + 4).padEnd(4, '0')
+				hexData += parseInt(chunk, 2).toString(16)
+			}
+			console.log(`  ✅ Detected BINARY format (converting to HEX)`)
 		} else if (/^[0-9a-fA-F]+$/.test(cleanedSequence)) {
 			detectedFormat = 'hex'
-			binarySequence = cleanedSequence
-				.split('')
-				.map((char) => {
-					const num = parseInt(char, 16)
-					return num.toString(2).padStart(4, '0')
-				})
-				.join('')
-			console.log(`  ✅ Detected HEX format (converting to binary)`)
+			hexData = cleanedSequence.toLowerCase()
+			console.log(`  ✅ Detected HEX format (using as-is)`)
 		} else {
 			throw new Error(
 				'Файл должен содержать только символы 0 и 1 (Binary), либо 0-9, A-F (HEX)',
 			)
 		}
 
-		if (binarySequence.length < 100) {
-			throw new Error('Последовательность должна содержать минимум 100 битов')
+		if (hexData.length < 25) {
+			throw new Error(
+				'Последовательность должна содержать минимум 100 битов (25 HEX символов)',
+			)
 		}
 
 		console.log(`✅ Detected format: ${detectedFormat}`)
-		console.log(`✅ Binary length: ${binarySequence.length} bits`)
-		console.log(`✅ Binary preview: ${binarySequence.slice(0, 100)}...`)
+		console.log(`✅ HEX length: ${hexData.length} chars`)
+		console.log(`✅ HEX preview: ${hexData.slice(0, 100)}...`)
 
 		const {data} = await apiClient.post<AuditResponse>('/api/audit/upload', {
 			name: file.name,
 			description: `External audit file: ${file.name} (${detectedFormat})`,
-			data: binarySequence,
+			data: hexData,
 		})
 		return data
 	},
